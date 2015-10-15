@@ -7,4 +7,14 @@
     <string name="txtLoginButton">Login</string>
     <string name="txtNoUser">Noch kein Konto? Jetzt registrieren.</string>
     <string name="txtWelcome">Willkommen bei Secure@Home. Bitte melden Sie sich mit Ihren Benutzerdaten an.</string>
+    <string name="txtNewUserRegistration">Registrierung</string>
+    <string name="txtRegistrationIntro">Bitte geben Sie folgnde Daten ein, um ein neues Konto bei Secure@Home zu erstellen.</string>
+    <string name="txtFirstname">Vorname</string>
+    <string name="txtLastname">Nachname</string>
+    <string name="txtEmail">E-Mail</string>
+    <string name="txtUsernameNewUser">Gewünschter Benutzername</string>
+    <string name="txtPasswordAgain">Passwort wiederholen</string>
+    <string name="txtRegistrateButton">Konto erstellen</string>
+    <string name="txtWebcamView">Übertragung</string>
+    <string name="txtStartBroadcast">Übertragung starten</string>
 </resources>
