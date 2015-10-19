@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by Alexander on 15.10.2015.
+ * This class show a preview of the Webcam. Here the user can start to upload files to the webserver.
  */
-public class WebcamActivity  extends AppCompatActivity {
+public class WebcamPreviewActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

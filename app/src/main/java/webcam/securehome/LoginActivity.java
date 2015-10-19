@@ -1,5 +1,6 @@
 package webcam.securehome;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,64 +13,75 @@ import android.widget.TextView;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    //String declaration
     private String username = null;
     private String password = null;
+    private String webcamID = null;
+    private String webcamDescription = null;
 
-    //EditText deklarieren
+    //EditText declaration
     private EditText txtUsername = null;
     private EditText txtPassword = null;
 
-    //TextView deklarieren
+    //TextView declaration
     private TextView txtErrorMessage = null;
     private TextView txtNoAccount = null;
 
-    //Button deklarieren
+    //Button declaration
     private Button btnLogin = null;
-
-    //TODO Config-File einlesen und auswerten
-    //TODO Verbindung zum Webserver herstellen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        //EditText generieren
+        //EditText generation
         this.txtUsername = (EditText) findViewById(R.id.txtUsername);
         this.txtPassword = (EditText) findViewById(R.id.txtPassword);
 
-        //TextView generieren
+        //TextView generation
         this.txtErrorMessage = (TextView) findViewById(R.id.txtErrorMessage);
         this.txtNoAccount = (TextView) findViewById(R.id.txtNoAccount);
 
-        //Button generieren
+        //Button generation
         this.btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        //Load the Configuration (Webcam ID, Webcam Description) if they exist.
+        loadConfigs();
 
         //Login-Button Listener
         this.btnLogin.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
+            new Button.OnClickListener() {
+                public void onClick(View v) {
 
-                        username = txtUsername.getText().toString();
-                        password = txtPassword.getText().toString();
+                    txtErrorMessage.setText(webcamID);
+                    username = txtUsername.getText().toString();
+                    password = txtPassword.getText().toString();
 
-                        if(username.equals("") || password.equals("")) {
-                            txtErrorMessage.setText("Bitte alle Felder ausfüllen.");
+                    if(username.equals("") || password.equals("")) {
+                        txtErrorMessage.setText("Bitte alle Felder ausfüllen.");
+                    } else {
+
+                        // TODO Überprüfen ob Login-Daten korrekt
+
+                        // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
+                        //Check if Device is already registrated as webcam
+                        if(!webcamID.equals("")) {
+                            // Webcam is registrated: Go to WebcamPreview Activity
+                            Intent goToWebcamPreviewActiviy = new Intent(LoginActivity.this, WebcamPreviewActivity.class);
+                            startActivity(goToWebcamPreviewActiviy);
+
                         } else {
-                            txtErrorMessage.setText("");
-
-                            // TODO Login-Funktionalität
-                            // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
-
-                            Intent goToWebcamActiviy = new Intent(LoginActivity.this, WebcamActivity.class);
-
-                            startActivity(goToWebcamActiviy);
-
+                            // Webcam is not registrated: Go to Webcam Registration Activity
+                            Intent goToWebcamRegistrationActivity = new Intent(LoginActivity.this, WebcamRegistrationActivity.class);
+                            startActivity(goToWebcamRegistrationActivity);
                         }
+
 
 
                     }
                 }
+            }
         );
 
         this.txtNoAccount.setOnClickListener(
@@ -82,6 +94,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         );
 
+    }
+
+    //Loads the preferences of the app. Needed to check if the device is already registrated as webcam.
+    private void loadConfigs(){
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        webcamID = sharedPreferences.getString("webcamID", "");
+        webcamDescription = sharedPreferences.getString("webcamDescription", "");
     }
 
 

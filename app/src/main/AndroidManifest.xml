@@ -32,10 +32,17 @@
         </activity>
 
         <activity
-            android:name=".WebcamActivity"
+            android:name=".WebcamRegistrationActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".WebcamPreviewActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name=".android.intent.action.VIEW" />
             </intent-filter>
         </activity>
     </application>

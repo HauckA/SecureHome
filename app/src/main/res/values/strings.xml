@@ -21,4 +21,7 @@
     <string name="txtServerConnectionIntro">Bitte geben Sie im Folgenden die IP Adresse des Webservers an:</string>
     <string name="txtIpAdress">IP-Adresse Webserver</string>
     <string name="txtServerConnectionButton">Verbindung herstellen</string>
+    <string name="txtRegistrateWebcamButton">Webcam registrieren</string>
+    <string name="txtWebcamDescription">Beschreibung (z.B. Standort, Stockwerk, )</string>
+    <string name="txtWebcamRegistrationInfo">Dieses Gerät wurde noch nicht als Webcam registriert. Bitte geben Sie eine kurzbeschreibung zu diesem Gerät ein:</string>
 </resources>
