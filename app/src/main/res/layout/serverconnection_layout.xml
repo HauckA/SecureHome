@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="LoginActivity">
+    tools:context="ServerConnectionActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,13 +17,13 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:background="@color/darkRed">
+            android:background="#B61717">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/txtLogin"
+                android:text="@string/txtServerConnection"
                 android:id="@+id/textView"
                 android:layout_gravity="center"
                 android:textColor="#E3DDBF"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/txtWelcome"
+                android:text="@string/txtServerConnectionIntro"
                 android:id="@+id/textView2"
                 android:layout_marginBottom="10dp"/>
 
@@ -56,33 +56,17 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtUsername"
-                android:hint="@string/txtUsername"
-                android:layout_marginBottom="10dp"/>
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/txtPassword"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/txtPassword"
+                android:id="@+id/txtIpAdress"
+                android:hint="@string/txtIpAdress"
                 android:layout_marginBottom="10dp"/>
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txtLoginButton"
-                android:id="@+id/btnLogin"
+                android:text="@string/txtServerConnectionButton"
+                android:id="@+id/btnServerConnection"
                 android:layout_marginBottom="20dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/txtNoUser"
-                android:id="@+id/textView3" />
         </LinearLayout>
     </LinearLayout>
 

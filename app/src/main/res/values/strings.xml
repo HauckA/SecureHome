@@ -17,4 +17,8 @@
     <string name="txtRegistrateButton">Konto erstellen</string>
     <string name="txtWebcamView">Übertragung</string>
     <string name="txtStartBroadcast">Übertragung starten</string>
+    <string name="txtServerConnection">Server-Verbindung</string>
+    <string name="txtServerConnectionIntro">Bitte geben Sie im Folgenden die IP Adresse des Webservers an:</string>
+    <string name="txtIpAdress">IP-Adresse Webserver</string>
+    <string name="txtServerConnectionButton">Verbindung herstellen</string>
 </resources>

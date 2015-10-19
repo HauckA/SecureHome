@@ -7,7 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Diese Klasse ist zuständig für das Login.
+ */
+public class LoginActivity extends AppCompatActivity {
 
     private String username = null;
     private String password = null;
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                             // TODO Login-Funktionalität
                             // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
 
-                            Intent intent = new Intent(MainActivity.this, WebcamActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, WebcamActivity.class);
 
                             startActivity(intent);
 
