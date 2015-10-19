@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/txtNoUser"
-                android:id="@+id/textView3" />
+                android:id="@+id/txtNoAccount" />
         </LinearLayout>
     </LinearLayout>
 

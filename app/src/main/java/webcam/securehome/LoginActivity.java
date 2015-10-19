@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //TextView deklarieren
     private TextView txtErrorMessage = null;
+    private TextView txtNoAccount = null;
 
     //Button deklarieren
     private Button btnLogin = null;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //TextView generieren
         this.txtErrorMessage = (TextView) findViewById(R.id.txtErrorMessage);
+        this.txtNoAccount = (TextView) findViewById(R.id.txtNoAccount);
 
         //Button generieren
         this.btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -59,15 +61,25 @@ public class LoginActivity extends AppCompatActivity {
                             // TODO Login-Funktionalität
                             // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
 
-                            Intent intent = new Intent(LoginActivity.this, WebcamActivity.class);
+                            Intent goToWebcamActiviy = new Intent(LoginActivity.this, WebcamActivity.class);
 
-                            startActivity(intent);
+                            startActivity(goToWebcamActiviy);
 
                         }
 
 
                     }
                 }
+        );
+
+        this.txtNoAccount.setOnClickListener(
+            new Button.OnClickListener() {
+                public void onClick(View v) {
+
+                    Intent goToUserRegistration = new Intent(LoginActivity.this, UserRegistrationActivity.class);
+                    startActivity(goToUserRegistration);
+                }
+            }
         );
 
     }

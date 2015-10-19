@@ -14,9 +14,9 @@ import android.widget.EditText;
 public class ServerConnectionActivity extends AppCompatActivity {
 
    //Deklaration
-    String serverIpAdress = null;
-    Button btnStartConnection = null;
-    EditText txtIpAdress = null;
+    private String serverIpAdress = null;
+    private Button btnStartConnection = null;
+    private EditText txtIpAdress = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
