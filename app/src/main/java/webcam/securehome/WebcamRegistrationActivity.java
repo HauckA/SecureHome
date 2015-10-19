@@ -1,8 +1,6 @@
 package webcam.securehome;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -55,10 +53,13 @@ public class WebcamRegistrationActivity extends AppCompatActivity {
                      } else {
 
                          //TODO neue Webcam in der Datenbank speichern (dafür wird noch die ID des angemeldeten Benutzers benötigt!)
+                        // TODO die ID der gespeicherten Webcam abrufen und dynamisch übergeben. Hie rwird als beispiel einfach die ID 1 eingetragen.
 
-                         saveConfig("webcamID", "10");
-                         saveConfig("webcamDescription", webcamDescription);
+                         //Save the new ID in the local config file
+                         fileHandler fh = new fileHandler();
+                         fh.saveFile("webcam_id.config", "1", getApplicationContext());
 
+                         //Go to WebcamPreview Activity
                          Intent goToWebcamPreviewActivity = new Intent(WebcamRegistrationActivity.this, WebcamPreviewActivity.class);
                          startActivity(goToWebcamPreviewActivity);
 
@@ -71,13 +72,4 @@ public class WebcamRegistrationActivity extends AppCompatActivity {
         );
 
     };
-
-    private void saveConfig(String key, String value){
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.commit();
-    }
-
-
 }

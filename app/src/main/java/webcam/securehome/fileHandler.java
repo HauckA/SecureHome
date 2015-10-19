@@ -3,6 +3,7 @@ package webcam.securehome;
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,11 +16,6 @@ import java.io.InputStreamReader;
  */
 public class fileHandler {
 
-    private Integer webcamID = null;
-
-    public Integer getWebcamID() {
-        return this.webcamID;
-    }
 
     public void saveFile(String fileName, String fileContent, Context ctx) {
 
@@ -35,6 +31,29 @@ public class fileHandler {
 
     };
 
+    public String getWebcamID(Context ctx) {
+        String str = null;
+        StringBuilder sb = new StringBuilder();
+        try{
+            FileInputStream is = ctx.openFileInput("webcam_id.config");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            is.close();
+        } catch(OutOfMemoryError om){
+            om.printStackTrace();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+        str = sb.toString();
+
+        return str;
+
+    }
+
+    /*
     public void readConfigFiles(Context ctx) {
 
 
@@ -63,6 +82,6 @@ public class fileHandler {
             // do something if the myfilename.txt does not exits
         }
 
-    }
+    }*/
 
 }

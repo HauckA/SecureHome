@@ -1,6 +1,5 @@
 package webcam.securehome;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,8 +15,6 @@ public class LoginActivity extends AppCompatActivity {
     //String declaration
     private String username = null;
     private String password = null;
-    private String webcamID = null;
-    private String webcamDescription = null;
 
     //EditText declaration
     private EditText txtUsername = null;
@@ -32,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
@@ -46,15 +44,14 @@ public class LoginActivity extends AppCompatActivity {
         //Button generation
         this.btnLogin = (Button) findViewById(R.id.btnLogin);
 
-        //Load the Configuration (Webcam ID, Webcam Description) if they exist.
-        loadConfigs();
+        //TODO Datei einlesen, um zu überprüfen ob das aktuelle Gerät bereits als Webcam registriert wurde
 
         //Login-Button Listener
         this.btnLogin.setOnClickListener(
             new Button.OnClickListener() {
                 public void onClick(View v) {
 
-                    txtErrorMessage.setText(webcamID);
+                    txtErrorMessage.setText("");
                     username = txtUsername.getText().toString();
                     password = txtPassword.getText().toString();
 
@@ -65,16 +62,19 @@ public class LoginActivity extends AppCompatActivity {
                         // TODO Überprüfen ob Login-Daten korrekt
 
                         // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
-                        //Check if Device is already registrated as webcam
-                        if(!webcamID.equals("")) {
-                            // Webcam is registrated: Go to WebcamPreview Activity
-                            Intent goToWebcamPreviewActiviy = new Intent(LoginActivity.this, WebcamPreviewActivity.class);
-                            startActivity(goToWebcamPreviewActiviy);
+                        //Check if device is already registrated
+                        fileHandler fh = new fileHandler();
+                        String webcamID = fh.getWebcamID(getApplicationContext());
 
-                        } else {
+                        //Check if Device is already registrated as webcam
+                        if(webcamID.equals("")) {
                             // Webcam is not registrated: Go to Webcam Registration Activity
                             Intent goToWebcamRegistrationActivity = new Intent(LoginActivity.this, WebcamRegistrationActivity.class);
                             startActivity(goToWebcamRegistrationActivity);
+                        } else {
+                            // Webcam is registrated: Go to WebcamPreview Activity
+                            Intent goToWebcamPreviewActiviy = new Intent(LoginActivity.this, WebcamPreviewActivity.class);
+                            startActivity(goToWebcamPreviewActiviy);
                         }
 
 
@@ -95,14 +95,5 @@ public class LoginActivity extends AppCompatActivity {
         );
 
     }
-
-    //Loads the preferences of the app. Needed to check if the device is already registrated as webcam.
-    private void loadConfigs(){
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        webcamID = sharedPreferences.getString("webcamID", "");
-        webcamDescription = sharedPreferences.getString("webcamDescription", "");
-    }
-
-
 
 }

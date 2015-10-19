@@ -31,19 +31,12 @@ public class WebcamPreviewActivity extends AppCompatActivity {
         //Button generation
         this.btnStartBroadcast = (Button) findViewById(R.id.btnStartBroadcast);
 
-        //Load configs
-        loadConfigs();
-
         //Set description-text
+        //TODO Read Webcam Description from Database
         this.txtWebcamDescription.setText(webcamDescription);
 
 
     };
 
-    private void loadConfigs(){
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        webcamID = sharedPreferences.getString("webcamID", "");
-        webcamDescription = sharedPreferences.getString("webcamDescription", "");
-    }
 
 }
