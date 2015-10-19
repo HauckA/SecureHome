@@ -38,18 +38,26 @@
             android:layout_height="fill_parent"
             android:padding="20dp">
 
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Webcam Beschreibung"
+                android:id="@+id/txtWebcamDescription" />
+
+            <ImageView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView"
                 android:layout_gravity="center_horizontal" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtStartBroadcast"
-                android:id="@+id/button"
+                android:id="@+id/btnStartBroadcast"
                 android:layout_gravity="center_horizontal" />
+
         </LinearLayout>
     </LinearLayout>
 
