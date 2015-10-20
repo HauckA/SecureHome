@@ -1,5 +1,7 @@
 package webcam.securehome;
-import android.content.Intent;
+
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,8 +24,15 @@ public class MainActivity extends AppCompatActivity {
     //Button deklarieren
     private Button btnLogin = null;
 
+
+
+
+
+    UserFunctions userFunction = new UserFunctions();
+
     //TODO Config-File einlesen und auswerten
     //TODO Verbindung zum Webserver herstellen
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +61,8 @@ public class MainActivity extends AppCompatActivity {
                             txtErrorMessage.setText("Bitte alle Felder ausfüllen.");
                         } else {
                             txtErrorMessage.setText("");
-
-                            // TODO Login-Funktionalität
-                            // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
-
-                            Intent intent = new Intent(MainActivity.this, WebcamActivity.class);
-
-                            startActivity(intent);
-
+                            //Execute Login and show next View
+                            new Login(MainActivity.this).execute(username, password);
                         }
 
 

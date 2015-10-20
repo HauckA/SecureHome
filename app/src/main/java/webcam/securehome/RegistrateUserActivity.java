@@ -1,4 +1,4 @@
-package webcam.webcam2;
+package webcam.securehome;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
