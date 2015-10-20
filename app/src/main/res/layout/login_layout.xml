@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="MainActivity">
+    tools:context="LoginActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,7 +17,7 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:background="#B61717">
+            android:background="@color/darkRed">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/txtNoUser"
-                android:id="@+id/textView3" />
+                android:id="@+id/txtNoAccount" />
         </LinearLayout>
     </LinearLayout>
 

@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="MainActivity">
+    tools:context="WebcamRegistrationActivity">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/txtRegistrationIntro"
+                    android:text="@string/txtWebcamRegistrationInfo"
                     android:id="@+id/textView2"
                     android:layout_marginBottom="10dp"/>
 
@@ -55,64 +55,23 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/txtErrorMessageRegistration"
+                    android:id="@+id/txtErrorMessageWebcamRegistration"
                     android:textColor="@color/darkRed"
                     android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtFirstname"
-                    android:hint="@string/txtFirstname"
+                    android:id="@+id/txtWebcamDescription"
+                    android:hint="@string/txtWebcamDescription"
                     android:layout_marginBottom="10dp"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtLastname"
-                    android:hint="@string/txtLastname"
-                    android:layout_marginBottom="10dp"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:id="@+id/txtEmail"
-                    android:hint="@string/txtEmail"
-                    android:layout_marginBottom="10dp"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtUsername"
-                    android:hint="@string/txtUsernameNewUser"
-                    android:layout_marginBottom="10dp"/>
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/txtPassword1"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="@string/txtPassword"
-                    android:layout_marginBottom="10dp"/>
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/txtPassword2"
-                    android:hint="@string/txtPasswordAgain"
-                    android:layout_marginBottom="10dp"/>
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtRegistrateButton"
-                    android:id="@+id/btnRegistrateUser"
+                    android:text="@string/txtRegistrateWebcamButton"
+                    android:id="@+id/btnRegistrateWebcam"
                     android:layout_marginBottom="20dp"/>
 
             </LinearLayout>

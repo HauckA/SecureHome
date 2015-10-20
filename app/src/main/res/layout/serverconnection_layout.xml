@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="WebcamActivity">
+    tools:context="ServerConnectionActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/txtWebcamView"
+                android:text="@string/txtServerConnection"
                 android:id="@+id/textView"
                 android:layout_gravity="center"
                 android:textColor="#E3DDBF"
@@ -42,21 +42,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Webcam Beschreibung"
-                android:id="@+id/txtWebcamDescription" />
+                android:text="@string/txtServerConnectionIntro"
+                android:id="@+id/textView2"
+                android:layout_marginBottom="10dp"
+                android:textColor="#000" />
 
-            <ImageView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/txtErrorMessage"
+                android:textColor="#B61717"/>
+
+            <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:layout_gravity="center_horizontal" />
+                android:id="@+id/txtIpAdress"
+                android:hint="@string/txtIpAdress"
+                android:layout_marginBottom="10dp"/>
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txtStartBroadcast"
-                android:id="@+id/btnStartBroadcast"
-                android:layout_gravity="center_horizontal" />
+                android:text="@string/txtServerConnectionButton"
+                android:id="@+id/btnServerConnection"
+                android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
     </LinearLayout>
