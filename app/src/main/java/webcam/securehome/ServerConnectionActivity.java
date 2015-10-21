@@ -1,6 +1,7 @@
 package webcam.securehome;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,13 +36,25 @@ public class ServerConnectionActivity extends AppCompatActivity {
                     serverIpAdress = txtIpAdress.getText().toString();
 
                     //TODO Verbindung zu Server herstellen, wenn OK weiterleiten auf Login
+                    new Loadcategory().execute();
 
-                    Intent intent = new Intent(ServerConnectionActivity.this, LoginActivity.class);
-                    startActivity(intent);
 
 
                 }
             }
         );
+
     }
-}
+    class Loadcategory extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Intent intent = new Intent(ServerConnectionActivity.this, LoginActivity.class);
+            startActivity(intent);
+            return null;
+        }
+
+        protected void onPostExecute(Void param) { }
+    } // AsyncTask over
+}//main class over
+

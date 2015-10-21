@@ -23,6 +23,7 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
     private LoginActivity loginActivity;
 
     private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
+    //private static String loginURL = "http://192.168.183.129/SecureHome/index.php";
     private static String login_tag = "login";
 
 
@@ -49,11 +50,26 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                 String email = json_user.getString("email");
                 Log.i("Login successful! ", "User: " + username + " Email: " + email);
 
-                //Start a new activity from an non-activity class!!!! Yiii HAAAAHHHH :)
-                Intent intent = new Intent(loginActivity, WebcamPreviewActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                loginActivity.startActivity(intent);
 
+                // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
+                //Check if device is already registrated
+                fileHandler fh = new fileHandler();
+                //String webcamID = fh.getWebcamID(loginActivity.getApplicationContext());
+                //Only for testing
+                String webcamID = "";
+
+                //Check if Device is already registrated as webcam
+                if(!webcamID.equals("")) {
+                    // Webcam is not registrated: Go to Webcam Registration Activity
+                    Intent intent = new Intent(loginActivity, WebcamRegistrationActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    loginActivity.startActivity(intent);
+                } else {
+                    //Start a new activity from an non-activity class!!!! Yiii HAAAAHHHH :)
+                    Intent intent = new Intent(loginActivity, WebcamPreviewActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    loginActivity.startActivity(intent);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -67,14 +83,14 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected JSONObject doInBackground(String... params) {
-        List<NameValuePair> paramsPack = new ArrayList<NameValuePair>();
+        List<NameValuePair> paramsPack = new ArrayList<>();
         paramsPack.add(new BasicNameValuePair("tag", login_tag));
         paramsPack.add(new BasicNameValuePair("username", params[0]));
         paramsPack.add(new BasicNameValuePair("password", params[1]));
         JSONObject json = jsonParser.getJSONFromUrl(loginURL, paramsPack);
 
         // return json
-        //Log.e("JSON", json.toString());
+        Log.e("JSON", json.toString());
         return json;
     }
 }

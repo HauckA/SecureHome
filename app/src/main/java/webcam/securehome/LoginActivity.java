@@ -1,4 +1,5 @@
 package webcam.securehome;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -62,25 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                         // TODO Überprüfen ob Login-Daten korrekt
 
                         new Login(LoginActivity.this).execute(username, password);
-
-                        // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
-                        //Check if device is already registrated
-                        fileHandler fh = new fileHandler();
-                        String webcamID = fh.getWebcamID(getApplicationContext());
-
-                        //Check if Device is already registrated as webcam
-                        if(webcamID.equals("")) {
-                            // Webcam is not registrated: Go to Webcam Registration Activity
-                            Intent goToWebcamRegistrationActivity = new Intent(LoginActivity.this, WebcamRegistrationActivity.class);
-                            startActivity(goToWebcamRegistrationActivity);
-                        } else {
-                            // Webcam is registrated: Go to WebcamPreview Activity
-                            Intent goToWebcamPreviewActiviy = new Intent(LoginActivity.this, WebcamPreviewActivity.class);
-                            startActivity(goToWebcamPreviewActiviy);
-                        }
-
-
-
                     }
                 }
             }
