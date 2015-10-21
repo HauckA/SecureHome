@@ -20,15 +20,15 @@ import webcam.securehome.helper.JSONParser;
 public class Login extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
-    private MainActivity mainActivity;
+    private LoginActivity loginActivity;
 
     private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
     private static String login_tag = "login";
 
 
     // constructor
-    public Login(MainActivity mainActivity){
-        this.mainActivity = mainActivity;
+    public Login(LoginActivity loginActivity){
+        this.loginActivity = loginActivity;
         jsonParser = new JSONParser();
     }
 
@@ -50,9 +50,9 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                 Log.i("Login successful! ", "User: " + username + " Email: " + email);
 
                 //Start a new activity from an non-activity class!!!! Yiii HAAAAHHHH :)
-                Intent intent = new Intent(mainActivity, WebcamActivity.class);
+                Intent intent = new Intent(loginActivity, WebcamPreviewActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mainActivity.startActivity(intent);
+                loginActivity.startActivity(intent);
 
             }
         } catch (JSONException e) {

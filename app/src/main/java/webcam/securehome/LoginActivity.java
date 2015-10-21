@@ -61,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         // TODO Überprüfen ob Login-Daten korrekt
 
+                        new Login(LoginActivity.this).execute(username, password);
+
                         // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
                         //Check if device is already registrated
                         fileHandler fh = new fileHandler();
