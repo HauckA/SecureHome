@@ -17,6 +17,37 @@ class DB_Functions {
          
     }
  
+	public function registerWebcam($user_id, $webcam_description) {
+		$query = "INSERT INTO device (isActive, description) VALUES (false,'$webcam_description')";
+		$result = mysql_query($query) or die(mysql_error());
+		
+		if ($result) {
+            // get last webcam id 
+            $webcam_id = mysql_insert_id(); // last inserted id
+			
+			//Get email of Userid
+			$query = "select * from user where id = $user_id";
+			$user = mysql_query($query) or die(mysql_error());
+			$user = mysql_fetch_array($user);
+			$user_email = $user['email'];
+			
+			//echo "Webcam ID: " . $webcam_id;
+			//echo "UserMail ID: " .$user_email;
+			//CAM Ordner in Benutzerordner erstellen
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/SecureHome/registratedUserhome/' . $user_email . "/" . $webcam_id)) {
+					mkdir($_SERVER['DOCUMENT_ROOT'] . '/SecureHome/registratedUserhome/' . $user_email . "/" . $webcam_id, 0777, true);
+					//echo "Ordner erfolgreich erstellt";
+			}
+			 
+            $result = mysql_query("INSERT INTO user_device (user_id, device_id, isActive) VALUES ($user_id, '$webcam_id', false)");
+            // return webcamid details
+            return $webcam_id;
+        } else {
+            return false;
+        }
+	}
+ 
+ 
     /**
      * Storing new user
      * returns user details
