@@ -54,15 +54,14 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
         try {
             res = jsonFromDoInBg.getString("success");
             if (Integer.parseInt(res) == 1) {
-                //TODO webcamId ins Config File speichern
 
                 webcamId = jsonFromDoInBg.getInt("webcam_id");
                 Log.i("Registrated Cam ID", String.valueOf(webcamId));
-                //Save the new ID in the local config file
-                //fileHandler fh = new fileHandler();
-                // fh.saveFile("webcam_id.config", "1", getApplicationContext());
 
-                // Webcam is not registrated: Go to Webcam Registration Activity
+                //Save the new ID in the local config file
+                fh.saveFile("webcam_id.config", Integer.toString(webcamId), webcamRegistrationActivity.getApplicationContext());
+
+                // Go To WebcamPreview Activity
                 Intent intent = new Intent(webcamRegistrationActivity, WebcamPreviewActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 webcamRegistrationActivity.startActivity(intent);

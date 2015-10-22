@@ -67,14 +67,11 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                 Log.i("Login successful! ", "Userid: " + userid + " Username: " + username + " Email: " + email);
 
 
-                // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
-
-                //TODO webcamID vom Config File lesen
-                //Only for testing
-                String webcamID = "1";
+                //Read webcamID from config-file and check if it is set or not.
+                String webcamID = fh.getFileContent("webcam_id.config", loginActivity.getApplicationContext()).trim();
 
                 //Check if Device is already registrated as webcam
-                if (!webcamID.equals("")) {
+                if (webcamID.equals("")) {
                     // Webcam is not registrated: Go to Webcam Registration Activity
                     Intent intent = new Intent(loginActivity, WebcamRegistrationActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

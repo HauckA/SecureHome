@@ -46,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         //Button generation
         this.btnLogin = (Button) findViewById(R.id.btnLogin);
 
-        //TODO Datei einlesen, um zu überprüfen ob das aktuelle Gerät bereits als Webcam registriert wurde
-
         //Login-Button Listener
         this.btnLogin.setOnClickListener(
             new Button.OnClickListener() {
