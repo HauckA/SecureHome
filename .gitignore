@@ -8,3 +8,5 @@
 /app/src/app.iml
 Secure@Home.iml
 SecureHome.iml
+.idea/modules.xml
+app/app.iml
