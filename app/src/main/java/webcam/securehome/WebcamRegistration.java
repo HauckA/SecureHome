@@ -24,6 +24,8 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
     //Bridged
     //private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
     //Host-Only
+
+    //TODO Werte vom Config File lesen
     private static String webcam_registration_URL = "http://192.168.83.128/SecureHome/index.php";
     private static String webcam_registration_TAG = "webcam_registration";
 
@@ -44,15 +46,18 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
         // check for login response
         String res = null;
         String error = null;
+        int webcamId = 0;
+
         try {
             res = jsonFromDoInBg.getString("success");
             if (Integer.parseInt(res) == 1) {
-                //TODO neue Webcam in der Datenbank speichern (dafür wird noch die ID des angemeldeten Benutzers benötigt!)
-                // TODO die ID der gespeicherten Webcam abrufen und dynamisch übergeben. Hie rwird als beispiel einfach die ID 1 eingetragen.
+                //TODO webcamId ins Config File speichern
 
+                webcamId = jsonFromDoInBg.getInt("webcam_id");
+                Log.i("Registrated Cam ID", String.valueOf(webcamId));
                 //Save the new ID in the local config file
                 //fileHandler fh = new fileHandler();
-                //  fh.saveFile("webcam_id.config", "1", getApplicationContext());
+                // fh.saveFile("webcam_id.config", "1", getApplicationContext());
 
                 // Webcam is not registrated: Go to Webcam Registration Activity
                 Intent intent = new Intent(webcamRegistrationActivity, WebcamPreviewActivity.class);
@@ -62,7 +67,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
             else{
                 error = jsonFromDoInBg.getString("error");
                 if(Integer.parseInt(error) == 1){
-                   // Log.e("Login Error", "Username or Password is incorrect");
+                    Log.e("Login Error", "Error occured in Webcam Registration");
                 }
             }
         } catch (JSONException e) {
@@ -73,7 +78,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
     protected JSONObject doInBackground(String... params) {
         List<NameValuePair> paramsPack = new ArrayList<>();
         paramsPack.add(new BasicNameValuePair("tag", webcam_registration_TAG));
-        paramsPack.add(new BasicNameValuePair("userid", String.valueOf(Login.userid)));
+        paramsPack.add(new BasicNameValuePair("user_id", String.valueOf(Login.userid)));
         paramsPack.add(new BasicNameValuePair("webcam_description", params[0]));
         JSONObject json = jsonParser.getJSONFromUrl(webcam_registration_URL, paramsPack);
 

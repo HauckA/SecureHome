@@ -52,15 +52,20 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
             res = jsonFromDoInBg.getString("success");
             if (Integer.parseInt(res) == 1) {
                 JSONObject json_user = jsonFromDoInBg.getJSONObject("user");
+
+                userid = jsonFromDoInBg.getInt("uid");
+                Log.i("userid", String.valueOf(userid));
                 String username = json_user.getString("username");
                 String email = json_user.getString("email");
-                Log.i("Login successful! ", "User: " + username + " Email: " + email);
+                Log.i("Login successful! ", "Userid: " + userid + " Username: " + username + " Email: " + email);
 
 
                 // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
                 //Check if device is already registrated
                 fileHandler fh = new fileHandler();
                 //String webcamID = fh.getWebcamID(loginActivity.getApplicationContext());
+
+                //TODO webcamID vom Config File lesen
                 //Only for testing
                 String webcamID = "1";
 
