@@ -61,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
 
                         // TODO Überprüfen ob Login-Daten korrekt
-
                         new Login(LoginActivity.this).execute(username, password);
                     }
                 }

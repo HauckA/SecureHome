@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import webcam.securehome.R;
-
 /**
  * Diese Klasse ist zuständig für die Registrierung eines neuen Benutzers
  */
@@ -85,15 +83,13 @@ public class UserRegistrationActivity extends AppCompatActivity {
                     txtPassword2.setText("");
                 }
                 else {
-                    //TODO Fill in this values to the database, show to the user that everything is ok and go back to the Login Screen.
+                    //TODO Fill in this values to the database, show to the user that everything is ok and go back to the Login Screen
+                        new Registration(UserRegistrationActivity.this).execute(firstname, lastname, email, username, password1);
+                    }
                 }
-            }
+
         }
         );
-
-
-
-
     };
 
 }

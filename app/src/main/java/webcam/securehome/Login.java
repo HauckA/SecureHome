@@ -21,9 +21,10 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
     private LoginActivity loginActivity;
-
-    private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
-    //private static String loginURL = "http://192.168.183.129/SecureHome/index.php";
+    //Bridged
+    //private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
+    //Host-Only
+    private static String loginURL = "http://192.168.83.128/SecureHome/index.php";
     private static String login_tag = "login";
 
 
@@ -42,9 +43,10 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
         // check for login response
         String res = null;
+        String error = null;
         try {
             res = jsonFromDoInBg.getString("success");
-            if(Integer.parseInt(res) == 1) {
+            if (Integer.parseInt(res) == 1) {
                 JSONObject json_user = jsonFromDoInBg.getJSONObject("user");
                 String username = json_user.getString("username");
                 String email = json_user.getString("email");
@@ -59,7 +61,7 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                 String webcamID = "";
 
                 //Check if Device is already registrated as webcam
-                if(!webcamID.equals("")) {
+                if (!webcamID.equals("")) {
                     // Webcam is not registrated: Go to Webcam Registration Activity
                     Intent intent = new Intent(loginActivity, WebcamRegistrationActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -71,16 +73,19 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                     loginActivity.startActivity(intent);
                 }
             }
+            else{
+                error = jsonFromDoInBg.getString("error");
+                if(Integer.parseInt(error) == 1){
+                    Log.e("Login Error", "Username or Password is incorrect");
+                }
+                else if(Integer.parseInt(error) == 2){
+                    Log.e("Login Error", "Error occured in Registration");
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-
-
     }
-
     @Override
     protected JSONObject doInBackground(String... params) {
         List<NameValuePair> paramsPack = new ArrayList<>();
