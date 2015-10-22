@@ -21,11 +21,11 @@ public class Registration extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
     private UserRegistrationActivity userRegistrationActivity;
-    //Bridged
-    //private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
-    //Host-Only
-    private static String registerURL = "http://192.168.83.128/SecureHome/index.php";
+
+    private static String registerURL = null;
     private static String registerTag = "register";
+
+    private fileHandler fh = new fileHandler();
 
 
     // constructor
@@ -35,7 +35,10 @@ public class Registration extends AsyncTask<String, Void, JSONObject> {
     }
 
     @Override
-    protected void onPreExecute() {}
+    protected void onPreExecute() {
+        //Read URL from Config-File
+        registerURL = fh.getFileContent("ip_adress.config", userRegistrationActivity.getApplicationContext()).trim();
+    }
 
 
     @Override

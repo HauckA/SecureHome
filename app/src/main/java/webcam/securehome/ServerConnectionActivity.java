@@ -19,6 +19,9 @@ public class ServerConnectionActivity extends AppCompatActivity {
     private Button btnStartConnection = null;
     private EditText txtIpAdress = null;
 
+    //FileHandler
+    private fileHandler fh = new fileHandler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,18 +31,22 @@ public class ServerConnectionActivity extends AppCompatActivity {
         this.btnStartConnection = (Button) findViewById(R.id.btnServerConnection);
         this.txtIpAdress = (EditText) findViewById(R.id.txtIpAdress);
 
+        //Read IP Adress vom Config-File
+        String ipAdress = fh.getFileContent("ip_adress.config", getApplicationContext()).trim();
+        txtIpAdress.setText(ipAdress);
+
         //Listener
         this.btnStartConnection.setOnClickListener(
             new Button.OnClickListener() {
                 public void onClick(View v) {
 
-                    serverIpAdress = txtIpAdress.getText().toString();
+                    serverIpAdress = txtIpAdress.getText().toString().trim();
+
+                    //Save the given IP Adress in Config File for use in future
+                    fh.saveFile("ip_adress.config", serverIpAdress, getApplicationContext());
 
                     //TODO Verbindung zu Server herstellen, wenn OK weiterleiten auf Login
                     new Loadcategory().execute();
-
-
-
                 }
             }
         );

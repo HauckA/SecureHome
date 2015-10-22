@@ -24,12 +24,13 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
     //Static Logged UserID
     public static int userid = 0;
-
     //Bridged
-    //private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
-    //Host-Only
-    private static String loginURL = "http://192.168.83.128/SecureHome/index.php";
+    private static String loginURL = null;
+
     private static String login_tag = "login";
+
+    private fileHandler fh = new fileHandler();
+
 
 
     // constructor
@@ -39,7 +40,12 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
     }
 
     @Override
-    protected void onPreExecute() {}
+    protected void onPreExecute() {
+
+        //get URL from config-file
+        loginURL = fh.getFileContent("ip_adress.config", this.loginActivity.getApplicationContext()).trim();
+
+    }
 
 
     @Override
@@ -48,6 +54,7 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
         // check for login response
         String res = null;
         String error = null;
+
         try {
             res = jsonFromDoInBg.getString("success");
             if (Integer.parseInt(res) == 1) {
@@ -61,9 +68,6 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
 
                 // TODO schauen ob Gerät registriert, falls ja auf webcamactivity weiterleiten, sonst auf webcamregistration
-                //Check if device is already registrated
-                fileHandler fh = new fileHandler();
-                //String webcamID = fh.getWebcamID(loginActivity.getApplicationContext());
 
                 //TODO webcamID vom Config File lesen
                 //Only for testing

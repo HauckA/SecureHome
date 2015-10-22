@@ -31,11 +31,11 @@ public class fileHandler {
 
     };
 
-    public String getWebcamID(Context ctx) {
+    public String getFileContent(String fileName, Context ctx) {
         String str = null;
         StringBuilder sb = new StringBuilder();
         try{
-            FileInputStream is = ctx.openFileInput("webcam_id.config");
+            FileInputStream is = ctx.openFileInput(fileName);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
             String line = null;
             while ((line = reader.readLine()) != null) {
@@ -53,35 +53,5 @@ public class fileHandler {
 
     }
 
-    /*
-    public void readConfigFiles(Context ctx) {
-
-
-        try {
-            // open the file for reading
-            InputStream instream = ctx.openFileInput("myfilename.txt");
-
-            // if file the available for reading
-            if (instream) {
-                // prepare the file for reading
-                InputStreamReader inputreader = new InputStreamReader(instream);
-                BufferedReader buffreader = new BufferedReader(inputreader);
-
-                String line;
-
-                // read every line of the file into the line-variable, on line at the time
-                while (( line = buffreader.readLine())) {
-                    // do something with the settings from the file
-                }
-
-            }
-
-            // close the file again
-            instream.close();
-        } catch (IOException e) {
-            // do something if the myfilename.txt does not exits
-        }
-
-    }*/
 
 }

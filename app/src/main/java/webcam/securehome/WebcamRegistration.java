@@ -21,13 +21,12 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
     private WebcamRegistrationActivity webcamRegistrationActivity;
-    //Bridged
-    //private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
-    //Host-Only
 
-    //TODO Werte vom Config File lesen
-    private static String webcam_registration_URL = "http://192.168.83.128/SecureHome/index.php";
+    private static String webcam_registration_URL = null;
     private static String webcam_registration_TAG = "webcam_registration";
+
+    //fileHandler
+    fileHandler fh = new fileHandler();
 
 
     // constructor
@@ -37,7 +36,11 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
     }
 
     @Override
-    protected void onPreExecute() {}
+    protected void onPreExecute() {
+        //Read URL from Config file
+        webcam_registration_URL = fh.getFileContent("ip_adress.config", webcamRegistrationActivity.getApplicationContext()).trim();
+
+    }
 
 
     @Override
