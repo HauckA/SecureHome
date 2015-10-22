@@ -21,6 +21,10 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
     private LoginActivity loginActivity;
+
+    //Static Logged UserID
+    public static int userid = 0;
+
     //Bridged
     //private static String loginURL = "http://192.168.1.113/SecureHome/index.php";
     //Host-Only
@@ -58,7 +62,7 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                 fileHandler fh = new fileHandler();
                 //String webcamID = fh.getWebcamID(loginActivity.getApplicationContext());
                 //Only for testing
-                String webcamID = "";
+                String webcamID = "1";
 
                 //Check if Device is already registrated as webcam
                 if (!webcamID.equals("")) {

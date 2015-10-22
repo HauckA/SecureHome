@@ -70,6 +70,13 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		  
 		  
 		  if ($user) {
+			   //create Directory for new User with EMAIL
+			   if (!file_exists('registratedUserhome/' . $user["email"])) {
+					mkdir('registratedUserhome/' . $user["email"], 0777, true);
+					echo "Ordner erfolgreich erstellt";
+			   }
+			  
+			  
 			   // user stored successfully
 			   $response["success"] = 1;
 			   $response["uid"] = $user["id"];
@@ -81,7 +88,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		  } else {
 			   // user failed to store
 			   $response["error"] = 1;
-			   $response["error_msg"] = "Error occured in Registartion";
+			   $response["error_msg"] = "Error occured in Registration";
 			   echo json_encode($response);
 		 }
   

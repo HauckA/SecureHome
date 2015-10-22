@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     //Button declaration
     private Button btnLogin = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

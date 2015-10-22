@@ -1,6 +1,5 @@
 package webcam.securehome;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -52,17 +51,7 @@ public class WebcamRegistrationActivity extends AppCompatActivity {
                          txtErrorMessage.setText("Bitte alle Felder ausfüllen!");
                      } else {
 
-                         //TODO neue Webcam in der Datenbank speichern (dafür wird noch die ID des angemeldeten Benutzers benötigt!)
-                        // TODO die ID der gespeicherten Webcam abrufen und dynamisch übergeben. Hie rwird als beispiel einfach die ID 1 eingetragen.
-
-                         //Save the new ID in the local config file
-                         fileHandler fh = new fileHandler();
-                         fh.saveFile("webcam_id.config", "1", getApplicationContext());
-
-                         //Go to WebcamPreview Activity
-                         Intent goToWebcamPreviewActivity = new Intent(WebcamRegistrationActivity.this, WebcamPreviewActivity.class);
-                         startActivity(goToWebcamPreviewActivity);
-
+                         new WebcamRegistration(WebcamRegistrationActivity.this).execute(webcamDescription);
                      }
 
 
