@@ -20,7 +20,7 @@ public class ServerConnectionActivity extends AppCompatActivity {
     private EditText txtIpAdress = null;
 
     //FileHandler
-    private fileHandler fh = new fileHandler();
+    private FileHandler fh = new FileHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

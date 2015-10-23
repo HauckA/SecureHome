@@ -25,8 +25,8 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
     private static String webcam_registration_URL = null;
     private static String webcam_registration_TAG = "webcam_registration";
 
-    //fileHandler
-    fileHandler fh = new fileHandler();
+    //FileHandler
+    FileHandler fh = new FileHandler();
 
 
     // constructor

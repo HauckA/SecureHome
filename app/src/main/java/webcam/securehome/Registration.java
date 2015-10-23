@@ -25,7 +25,7 @@ public class Registration extends AsyncTask<String, Void, JSONObject> {
     private static String registerURL = null;
     private static String registerTag = "register";
 
-    private fileHandler fh = new fileHandler();
+    private FileHandler fh = new FileHandler();
 
 
     // constructor

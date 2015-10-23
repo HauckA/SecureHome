@@ -29,7 +29,7 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
     private static String login_tag = "login";
 
-    private fileHandler fh = new fileHandler();
+    private FileHandler fh = new FileHandler();
 
 
 
