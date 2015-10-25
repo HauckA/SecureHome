@@ -51,14 +51,6 @@
                     android:id="@+id/textView2"
                     android:layout_marginBottom="10dp"/>
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/txtErrorMessageRegistration"
-                    android:textColor="@color/darkRed"
-                    android:textStyle="bold"/>
-
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

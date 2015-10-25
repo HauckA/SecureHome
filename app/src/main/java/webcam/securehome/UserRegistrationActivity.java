@@ -6,11 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Diese Klasse ist zuständig für die Registrierung eines neuen Benutzers
  */
 public class UserRegistrationActivity extends AppCompatActivity {
+
+    //Toast Error Message
+    private static final String MSG_NO_INPUT = "Bitte alle Felder ausfüllen!";
+    private static final String MSG_PASSWORD_NOT_EQUAL = "Die Passwörter stimmen nicht überein!";
 
     //Strings declaration
     private String firstname = null;
@@ -28,9 +33,6 @@ public class UserRegistrationActivity extends AppCompatActivity {
     private EditText txtPassword1 = null;
     private EditText txtPassword2 = null;
 
-    //Textview declaration
-    private TextView txtErrorMessage = null;
-
     //Button declaration
     private Button btnRegistrateUser = null;
 
@@ -47,9 +49,6 @@ public class UserRegistrationActivity extends AppCompatActivity {
         this.txtPassword1 = (EditText) findViewById(R.id.txtPassword1);
         this.txtPassword2 = (EditText) findViewById(R.id.txtPassword2);
 
-        //TextView generation
-        this.txtErrorMessage = (TextView) findViewById(R.id.txtErrorMessageRegistration);
-
         //Button generation
         this.btnRegistrateUser = (Button) findViewById(R.id.btnRegistrateUser);
 
@@ -59,9 +58,6 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-                //Delete ErrorMessage
-                txtErrorMessage.setText("");
 
                 //Assign EditText values to the strings
                 firstname = txtFirstname.getText().toString();
@@ -73,12 +69,12 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
                 //Check if all values are set
                 if(firstname.equals("") || lastname.equals("") || email.equals("") || username.equals("") || password1.equals("") || password2.equals("")) {
-                    txtErrorMessage.setText("Bitte alle Felder ausfüllen!");
+                    Toast.makeText(v.getContext(), MSG_NO_INPUT, Toast.LENGTH_LONG).show();
                 }
 
                 // Check if Password1 and Password2 have the same value
                 else if (!password1.equals(password2)) {
-                    txtErrorMessage.setText("Die Passwörter stimmen nicht überein!");
+                    Toast.makeText(v.getContext(), MSG_PASSWORD_NOT_EQUAL, Toast.LENGTH_LONG).show();
                     txtPassword1.setText("");
                     txtPassword2.setText("");
                 }

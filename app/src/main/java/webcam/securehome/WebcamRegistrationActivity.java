@@ -6,20 +6,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Alexander on 15.10.2015.
  */
 public class WebcamRegistrationActivity extends AppCompatActivity {
 
+    //Toast Error Message
+    private static final String MSG_NO_INPUT = "Bitte Beschreibung angeben!";
+
     //String declaration
     private String webcamDescription = null;
 
     //EditText declaration
     private EditText txtWebcamDescription = null;
-
-    //TextView declaration
-    private TextView txtErrorMessage = null;
 
     //Button declaration
     private Button btnRegistrateWebcam = null;
@@ -31,9 +32,6 @@ public class WebcamRegistrationActivity extends AppCompatActivity {
         //EditText generation
         this.txtWebcamDescription = (EditText) findViewById(R.id.txtWebcamDescription);
 
-        //TextView generation
-        this.txtErrorMessage = (TextView) findViewById(R.id.txtErrorMessageWebcamRegistration);
-
         //Button generation
         this.btnRegistrateWebcam = (Button) findViewById(R.id.btnRegistrateWebcam);
 
@@ -42,13 +40,12 @@ public class WebcamRegistrationActivity extends AppCompatActivity {
 
                  @Override
                  public void onClick(View v) {
-                     txtErrorMessage.setText("");
 
                     webcamDescription = txtWebcamDescription.getText().toString();
 
                      //Check if value is set
                      if(webcamDescription.equals("")) {
-                         txtErrorMessage.setText("Bitte alle Felder ausfüllen!");
+                         Toast.makeText(v.getContext(), MSG_NO_INPUT, Toast.LENGTH_LONG).show();
                      } else {
 
                          new WebcamRegistration(WebcamRegistrationActivity.this).execute(webcamDescription);

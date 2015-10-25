@@ -7,11 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Diese Klasse ist zuständig für das Login.
  */
 public class LoginActivity extends AppCompatActivity {
+
+    //Toast Error Message
+    private static final String MSG_NO_INPUT = "Bitte alle Felder ausfüllen!";
 
     //String declaration
     private String username = null;
@@ -22,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtPassword = null;
 
     //TextView declaration
-    private TextView txtErrorMessage = null;
     private TextView txtNoAccount = null;
 
     //Button declaration
@@ -40,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         this.txtPassword = (EditText) findViewById(R.id.txtPassword);
 
         //TextView generation
-        this.txtErrorMessage = (TextView) findViewById(R.id.txtErrorMessage);
         this.txtNoAccount = (TextView) findViewById(R.id.txtNoAccount);
 
         //Button generation
@@ -51,13 +53,12 @@ public class LoginActivity extends AppCompatActivity {
             new Button.OnClickListener() {
                 public void onClick(View v) {
 
-                    txtErrorMessage.setText("");
                     username = txtUsername.getText().toString();
                     password = txtPassword.getText().toString();
 
                     //Check if all fields are filled with values
                     if(username.equals("") || password.equals("")) {
-                        txtErrorMessage.setText("Bitte alle Felder ausfüllen.");
+                        Toast.makeText(v.getContext(), MSG_NO_INPUT, Toast.LENGTH_LONG).show();
                     } else {
 
                         //Check login

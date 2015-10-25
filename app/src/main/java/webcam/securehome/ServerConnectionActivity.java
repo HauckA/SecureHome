@@ -7,12 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Diese Klasse connects to the webservice
  * Starting point of the app.
  */
 public class ServerConnectionActivity extends AppCompatActivity {
+
+    //Toast Error Message
+    private static final String MSG_NO_INPUT = "Bitte Serveradresse angeben!";
 
    //Deklaration
     private String serverIpAdress = null;
@@ -40,13 +44,18 @@ public class ServerConnectionActivity extends AppCompatActivity {
             new Button.OnClickListener() {
                 public void onClick(View v) {
 
+
                     serverIpAdress = txtIpAdress.getText().toString().trim();
 
-                    //Save the given IP Adress in Config File for use in future
-                    fh.saveFile("ip_adress.config", serverIpAdress, getApplicationContext());
+                    if(serverIpAdress.equals("")) {
+                        Toast.makeText(v.getContext(), MSG_NO_INPUT, Toast.LENGTH_LONG).show();
+                    } else {
+                        //Save the given IP Adress in Config File for use in future
+                        fh.saveFile("ip_adress.config", serverIpAdress, getApplicationContext());
 
-                    //TODO Verbindung zu Server herstellen, wenn OK weiterleiten auf Login
-                    new Loadcategory().execute();
+                        //TODO Verbindung zu Server herstellen, wenn OK weiterleiten auf Login
+                        new Loadcategory().execute();
+                    }
                 }
             }
         );
