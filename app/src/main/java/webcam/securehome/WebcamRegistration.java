@@ -38,7 +38,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPreExecute() {
         //Read URL from Config file
-        webcam_registration_URL = fh.getFileContent("ip_adress.config", webcamRegistrationActivity.getApplicationContext()).trim();
+        webcam_registration_URL = fh.getFileContent("ip_adress.config", this.webcamRegistrationActivity.getApplicationContext());
 
     }
 
@@ -59,7 +59,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
                 Log.i("Registrated Cam ID", String.valueOf(webcamId));
 
                 //Save the new ID in the local config file
-                fh.saveFile("webcam_id.config", Integer.toString(webcamId), webcamRegistrationActivity.getApplicationContext());
+                fh.saveFile("webcam_id.config", Integer.toString(webcamId), this.webcamRegistrationActivity.getApplicationContext());
 
                 // Go To WebcamPreview Activity
                 Intent intent = new Intent(webcamRegistrationActivity, WebcamPreviewActivity.class);

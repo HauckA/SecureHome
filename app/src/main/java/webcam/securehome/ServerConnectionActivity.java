@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Diese Klasse stellt die Verbindung zu Webserver/Datenbank her.
- * Ist der Startpunkt der App.
+ * Diese Klasse connects to the webservice
+ * Starting point of the app.
  */
 public class ServerConnectionActivity extends AppCompatActivity {
 
@@ -32,7 +32,7 @@ public class ServerConnectionActivity extends AppCompatActivity {
         this.txtIpAdress = (EditText) findViewById(R.id.txtIpAdress);
 
         //Read IP Adress vom Config-File
-        String ipAdress = fh.getFileContent("ip_adress.config", getApplicationContext()).trim();
+        String ipAdress = fh.getFileContent("ip_adress.config", getApplicationContext());
         txtIpAdress.setText(ipAdress);
 
         //Listener

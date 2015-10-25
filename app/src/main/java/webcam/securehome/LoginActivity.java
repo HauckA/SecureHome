@@ -55,11 +55,12 @@ public class LoginActivity extends AppCompatActivity {
                     username = txtUsername.getText().toString();
                     password = txtPassword.getText().toString();
 
+                    //Check if all fields are filled with values
                     if(username.equals("") || password.equals("")) {
                         txtErrorMessage.setText("Bitte alle Felder ausfüllen.");
                     } else {
 
-                        // TODO Überprüfen ob Login-Daten korrekt
+                        //Check login
                         new Login(LoginActivity.this).execute(username, password);
                     }
                 }
