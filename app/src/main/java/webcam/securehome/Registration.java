@@ -37,7 +37,7 @@ public class Registration extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPreExecute() {
         //Read URL from Config-File
-        registerURL = fh.getFileContent("ip_adress.config", this.userRegistrationActivity.getApplicationContext());
+        registerURL = fh.getFileContent("webservice_url.config", this.userRegistrationActivity.getApplicationContext());
     }
 
 

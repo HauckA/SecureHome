@@ -38,7 +38,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPreExecute() {
         //Read URL from Config file
-        webcam_registration_URL = fh.getFileContent("ip_adress.config", this.webcamRegistrationActivity.getApplicationContext());
+        webcam_registration_URL = fh.getFileContent("webservice_url.config", this.webcamRegistrationActivity.getApplicationContext());
 
     }
 

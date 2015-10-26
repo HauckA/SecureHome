@@ -20,6 +20,7 @@ public class ServerConnectionActivity extends AppCompatActivity {
 
    //Deklaration
     private String serverIpAdress = null;
+    private String webserviceURL = null;
     private Button btnStartConnection = null;
     private EditText txtIpAdress = null;
 
@@ -52,6 +53,9 @@ public class ServerConnectionActivity extends AppCompatActivity {
                     } else {
                         //Save the given IP Adress in Config File for use in future
                         fh.saveFile("ip_adress.config", serverIpAdress, getApplicationContext());
+
+                        webserviceURL = "http://" + serverIpAdress + "/api/index.php";
+                        fh.saveFile("webservice_url.config", webserviceURL, getApplicationContext());
 
                         //TODO Verbindung zu Server herstellen, wenn OK weiterleiten auf Login
                         new Loadcategory().execute();
