@@ -15,7 +15,7 @@
 				
 				
 				//CALL API
-				$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/res/index.php";
+				$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/api/index.php";
 				
 				$data = array(
 					"tag" => $tag,
@@ -40,15 +40,17 @@
 				
 				//close connection
 				curl_close($ch);
-				
-				print_r($result);
+
 				//decode JSON String
 				$result = (json_decode($result, true));
-				
-				echo "<br /> <br />";
-				echo $result["error"];
-				
-				
+
+				if($result["success"] == 1) {
+					$successMessage = "Konto erfolgreich erstellt.";
+				} else if ($result["success"] == 0) {
+					$errorMessage = "Fehler bei der Registrierung: Diese Mailadress ist bereits registriert.";					
+				}	else {
+					$errorMessage ="Fehler bei der Registrierung. Bitte später erneut versuchen.";
+				}
 				
 			} else {
 				$errorMessage = "Die eingegebenen Passwörter stimmen nicht überein!";
@@ -131,7 +133,14 @@
 			<p class="error">
 				<?php
 					if(isset($errorMessage)) {
-						echo $errorMessage;
+						
+						echo "<div class=\"alert\">
+								$errorMessage
+							</div>";
+					} else if(isset($successMessage)) {
+						echo "<div class=\"success\">
+								$successMessage
+							</div";
 					}
 				?>
 			</p>

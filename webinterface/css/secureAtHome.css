@@ -43,7 +43,14 @@ html,
 	background-color: #F2F2F2;
 }
 
+.success {
+	background-color: #43ac6a;
+	color: #fff;
+}
+
+.alert,
 .button.alert {
+	color: #fff;
 	background-color: #730E0E;
 }
 

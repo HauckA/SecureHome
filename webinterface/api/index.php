@@ -15,7 +15,7 @@ ini_set('display_errors', 'Off');
  */
 
  
-if (isset($_POST['tag']) && $_REQUEST['tag'] != '') {
+if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 
  $tag = $_REQUEST['tag'];
  
@@ -87,7 +87,7 @@ if (isset($_POST['tag']) && $_REQUEST['tag'] != '') {
 			  } else {
 				   // user failed to store
 				   $response["error"] = 1;
-				   $response["error_msg"] = "Error occured in Registartion";
+				   $response["error_msg"] = "Error occured in Registration";
 				   echo json_encode($response);
 			 }
 	  
