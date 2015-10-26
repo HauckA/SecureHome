@@ -4,10 +4,12 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import webcam.securehome.helper.CameraView;
 
@@ -63,8 +65,14 @@ public class WebcamPreviewActivity extends AppCompatActivity {
         }
 
 
+        this.btnStartBroadcast.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
 
-    };
+                        //TODO Submit Images to Server
 
-
+                    }
+                }
+        );
+    }
 }
