@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <!doctype html>
 <html class="no-js" lang="de">
   <head>
@@ -22,9 +26,11 @@
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
 				<ul class="right">
+					<?php if(!isset($_SESSION['loggedIn'])) { ?>
 					<li>
 						<a href="create_account.php">Mitglied werden</a>
 					</li>
+					<?php } ?>
 					<li class="has-dropdown">
 						<a href="#">Support</a>
 						<ul class="dropdown">
@@ -39,6 +45,15 @@
 							<li class="active"><a href="#">Impressum</a></li>
 						</ul>
 					</li>
+					<?php if(isset($_SESSION['loggedIn'])) { ?>
+						<li>
+							<a href="webcam_monitor.php">
+								<?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?>
+							</a>
+						</li>
+						
+					<?php } else { ?>
+					
 					<li class="has-form">
 						<div class="row">
 							<form action="login.php" method="post">
@@ -57,6 +72,8 @@
 							</form>
 						</div>
 					</li>
+					
+					<?php } ?>
 				</ul>
 			</section>
 		</nav>

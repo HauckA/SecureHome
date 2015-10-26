@@ -1,5 +1,12 @@
 <?php
 	
+	session_start();
+	
+	//Check if the user is already logged in
+	if(isset($_SESSION['loggedIn']) && $_SESSION["loggedIn"] == 1) {
+		header("Location: webcam_monitor.php");
+	}
+	
 	if(isset($_REQUEST['login'])) {
 		$username = $_REQUEST['username'];
 		$password = $_REQUEST['password'];
@@ -33,13 +40,15 @@
 				curl_close($ch);
 
 				//decode JSON String
-				print_r($result);
 				$result = (json_decode($result, true));
 
 				if($result["success"] == 1) {
-					$successMessage = "Login erfolgreich";
 					
-					
+					//Login successfull
+					$_SESSION["loggedIn"] = 1;
+					$_SESSION["firstname"] = $result["user"]["firstname"];
+					$_SESSION["lastname"] = $result["user"]["lastname"];
+					header("Location: webcam_monitor.php");
 					
 				} else if ($result["success"] == 0) {
 					$errorMessage = "Username oder Passwort ist falsch.";					
@@ -58,7 +67,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mitglied werden | Secure@Home</title>
+    <title>Login | Secure@Home</title>
     <link rel="stylesheet" href="css/main.css" />
     <script src="js/vendor/modernizr.js"></script>
   </head>

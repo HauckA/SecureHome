@@ -59,6 +59,11 @@ html,
 	text-decoration: none;
 }
 
+#maincontent.webcam_monitor {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
 .fullWidth {
 	width: 100%;
 }
