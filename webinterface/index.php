@@ -50,6 +50,7 @@
 									<input type="password" placeholder="Passwort" name="password" />
 								</div>
 								<div class="large-4 small-4 columns">
+									<input type="hidden" name="tag" value="login" />
 									<input type="submit" value="Login" name="login" />
 								
 								</div>

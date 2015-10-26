@@ -107,16 +107,20 @@
 					</li>
 					<li class="has-form">
 						<div class="row">
-							<div class="large-4 small-4 columns">
-								<input type="text" placeholder="Benutzername" />
-							</div>
-							<div class="large-4 small-4 columns">
+							<form action="login.php" method="post">
+								<div class="large-4 small-4 columns">
+									<input type="text" placeholder="Benutzername" name="username" />
+								</div>
+								<div class="large-4 small-4 columns">
+									
+									<input type="password" placeholder="Passwort" name="password" />
+								</div>
+								<div class="large-4 small-4 columns">
+									<input type="hidden" name="tag" value="login" />
+									<input type="submit" value="Login" name="login" />
 								
-								<input type="password" placeholder="Passwort" />
-							</div>
-							<div class="large-4 small-4 columns">
-							<a href="#" class="alert button expand">Login</a>
-							</div>
+								</div>
+							</form>
 						</div>
 					</li>
 				</ul>

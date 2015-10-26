@@ -3,9 +3,49 @@
 	if(isset($_REQUEST['login'])) {
 		$username = $_REQUEST['username'];
 		$password = $_REQUEST['password'];
+		$tag = $_REQUEST['tag'];
 		
 		//Check if every formfield is filled with values
 		if(!empty($username) AND !empty($password)) {
+			
+			//CALL API
+				$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/api/index.php";
+				
+				$data = array(
+					"tag" => $tag,
+					"username" => $username,
+					"password" => $password
+				);
+				
+				
+				//open connection
+				$ch = curl_init();
+				
+				curl_setopt($ch, CURLOPT_POST, sizeof($data));
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_URL, $url);
+
+				//execute post
+				$result = curl_exec($ch);
+				
+				//close connection
+				curl_close($ch);
+
+				//decode JSON String
+				print_r($result);
+				$result = (json_decode($result, true));
+
+				if($result["success"] == 1) {
+					$successMessage = "Login erfolgreich";
+					
+					
+					
+				} else if ($result["success"] == 0) {
+					$errorMessage = "Username oder Passwort ist falsch.";					
+				}	else {
+					$errorMessage ="Fehler beim Login. Bitte später erneut versuchen.";
+				}
 			
 		} else {
 			$errorMessage = "Bitte alle Felder ausfüllen!";
@@ -56,16 +96,20 @@
 					</li>
 					<li class="has-form">
 						<div class="row">
-							<div class="large-4 small-4 columns">
-								<input type="text" placeholder="Benutzername" />
-							</div>
-							<div class="large-4 small-4 columns">
+							<form action="login.php" method="post">
+								<div class="large-4 small-4 columns">
+									<input type="text" placeholder="Benutzername" name="username" />
+								</div>
+								<div class="large-4 small-4 columns">
+									
+									<input type="password" placeholder="Passwort" name="password" />
+								</div>
+								<div class="large-4 small-4 columns">
+									<input type="hidden" name="tag" value="login" />
+									<input type="submit" value="Login" name="login" />
 								
-								<input type="password" placeholder="Passwort" />
-							</div>
-							<div class="large-4 small-4 columns">
-							<a href="#" class="alert button expand">Login</a>
-							</div>
+								</div>
+							</form>
 						</div>
 					</li>
 				</ul>
@@ -82,7 +126,15 @@
 			<p class="error">
 				<?php
 					if(isset($errorMessage)) {
-						echo $errorMessage;
+						echo " 
+							<div class=\"alert\">
+								$errorMessage
+							</div>";
+					}else if(isset($successMessage)) {
+						echo"
+							<div class=\"success\">
+								$successMessage
+							</div>";
 					}
 				?>
 			</p>
@@ -94,13 +146,14 @@
 						</div>
 						<div class="large-6 columns">
 							<label>Passwort</label>
-						  <input type="text" name="passowrd"/>
+						  <input type="text" name="password"/>
 						</div>
 					  </div>
 					  <div class="row">
 						<div class="large-6 columns">
 						</div>
 						<div class="large-6 columns">
+							<input type="hidden" name="tag" value="login" />
 							<input type="submit" value="Login" name="login" />
 						</div>
 					  </div>
