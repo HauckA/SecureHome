@@ -3,6 +3,7 @@ package webcam.securehome;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -24,6 +25,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
 
     private static String webcam_registration_URL = null;
     private static String webcam_registration_TAG = "webcam_registration";
+    private static final String MSG_ERROR1 = "Error occured in Webcam Registration";
 
     //FileHandler
     FileHandler fh = new FileHandler();
@@ -70,6 +72,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
                 error = jsonFromDoInBg.getString("error");
                 if(Integer.parseInt(error) == 1){
                     Log.e("Login Error", "Error occured in Webcam Registration");
+                    Toast.makeText(webcamRegistrationActivity.getApplicationContext(), MSG_ERROR1, Toast.LENGTH_LONG).show();
                 }
             }
         } catch (JSONException e) {

@@ -3,6 +3,7 @@ package webcam.securehome;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -21,6 +22,10 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
     private LoginActivity loginActivity;
+
+    private static final String MSG_ERROR1 = "Username or Password is incorrect!";
+    private static final String MSG_ERROR2 = "Error occured in registration!";
+
 
     //Static Logged UserID
     public static int userid = 0;
@@ -87,9 +92,12 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                 error = jsonFromDoInBg.getString("error");
                 if(Integer.parseInt(error) == 1){
                     Log.e("Login Error", "Username or Password is incorrect");
+                    Toast.makeText(loginActivity.getApplicationContext(), MSG_ERROR1, Toast.LENGTH_LONG).show();
+
                 }
                 else if(Integer.parseInt(error) == 2){
                     Log.e("Login Error", "Error occured in Registration");
+                    Toast.makeText(loginActivity.getApplicationContext(), MSG_ERROR2, Toast.LENGTH_LONG).show();
                 }
             }
         } catch (JSONException e) {

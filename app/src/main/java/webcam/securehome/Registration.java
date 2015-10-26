@@ -3,6 +3,7 @@ package webcam.securehome;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -24,6 +25,9 @@ public class Registration extends AsyncTask<String, Void, JSONObject> {
 
     private static String registerURL = null;
     private static String registerTag = "register";
+
+    private static final String MSG_ERROR1 = "Error occured in Registration";
+    private static final String MSG_ERROR2 = "Error occured in Registration";
 
     private FileHandler fh = new FileHandler();
 
@@ -58,9 +62,11 @@ public class Registration extends AsyncTask<String, Void, JSONObject> {
                 error = jsonFromDoInBg.getString("error");
                 if(Integer.parseInt(error) == 1){
                     Log.e("Registration Error", "");
+                    Toast.makeText(userRegistrationActivity.getApplicationContext(), MSG_ERROR1, Toast.LENGTH_LONG).show();
                 }
                 else if(Integer.parseInt(error) == 2){
                     Log.e("Registration Error", "Error occured in Registration");
+                    Toast.makeText(userRegistrationActivity.getApplicationContext(), MSG_ERROR2, Toast.LENGTH_LONG).show();
                 }
             }
         } catch (JSONException e) {
