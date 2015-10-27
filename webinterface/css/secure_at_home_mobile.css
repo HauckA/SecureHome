@@ -1,0 +1,12 @@
+@media screen and (max-width: 620px)
+{
+
+	#maincontent .row .columns {
+		width: 100%;
+	}
+	
+	#maincontent .webcam h5 {
+		margin-top: 15px;
+	}
+
+}

@@ -1,0 +1,154 @@
+/* Styles for the Secure@Home Webinterface */
+
+/*Foundation Korrekturen*/
+.top-bar,
+.top-bar-section ul li,
+.top-bar-section .has-form,
+.top-bar-section li:not(.has-form) a:not(.button) {
+	background-color: transparent;
+}
+
+/* Styles */
+
+.top-bar-section li:not(.has-form) a:not(.button):hover,
+.top-bar-section li.active:not(.has-form) a:not(.button):hover {
+	background-color: #730E0E;
+}
+
+html {
+	overflow-y: scroll;
+}
+
+body {
+	background-color: #F2F2F2;
+}
+
+body, 
+html, 
+.panel li {
+	color: #262626;
+}
+
+#maincontent a,
+#footer a {
+	color: #730e0e;
+	text-decoration: underline;
+}
+
+#maincontent a:hover,
+#footer a:hover {
+	text-decoration: none;
+}
+
+#header {
+	background-color: #B61717;
+}
+
+.panel {
+	background-color: #F2F2F2;
+}
+
+.success {
+	background-color: #43ac6a;
+	color: #fff;
+}
+
+.alert,
+.button.alert {
+	color: #fff;
+	background-color: #730E0E;
+}
+
+#maincontent a.alert {
+	color: #fff;
+	text-decoration: none;
+}
+
+#maincontent.webcam_monitor {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+h1 {
+	color: #E3DDBF;
+}
+
+input[type="submit"] {
+	color: #fff;
+	background-color: #730E0E;
+	border: none;
+	padding-top: 0.4125rem;
+	padding-bottom: 0.4125rem;
+	width: 100%;
+}
+
+#maincontent {
+	padding-bottom: 40px;
+	padding-top: 40px;
+	background-color: #fff;
+}
+
+#maincontent .row {
+	margin-top: 20px;
+}
+
+
+h4 {
+	font-weight: bold;
+	font-size: 1.1rem;
+	margin-bottom: 3px;
+}
+
+h5, 
+#maincontent h5 a {
+	font-weight: bold;
+	color: #B61717;
+}
+
+#maincontent h5 a {
+	text-decoration: none;
+}
+
+#footer {
+	font-size: 0.8rem;
+	font-style: italic;
+	background-color: #F2F2F2;
+	padding: 10px 0px;
+}
+
+
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+	background-color: #fff;
+	color: #262626;
+}
+
+.top-bar-section  li.has-dropdown > a::after {
+	border-color: #fff transparent transparent;
+}
+
+.top-bar-section  li.active.has-dropdown > a::after {
+	border-color: #262626 transparent transparent;
+}
+
+.webcam .webcam_content {
+	position: relative;
+}
+
+.webcam .webcam_content .webcam_image img {
+	width: 100%;
+	border-radius: 10px;
+}
+
+.webcam .webcam_content .status_image {
+	position: absolute;
+	padding: 5px 10px 5px 5px;
+	background-color: #E3DDBF;
+	top: 15px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
