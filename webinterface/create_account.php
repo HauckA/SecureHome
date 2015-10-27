@@ -74,6 +74,8 @@
     <title>Mitglied werden | Secure@Home</title>
     <link rel="stylesheet" href="css/main.css" />
     <script src="js/vendor/modernizr.js"></script>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
   </head>
   <body>
     
