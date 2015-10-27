@@ -35,14 +35,14 @@
 						<a href="#">Support</a>
 						<ul class="dropdown">
 							<li><a href="#">Einrichtung</a></li>
-							<li class="active"><a href="#">Kontakt</a></li>
+							<li><a href="#">Kontakt</a></li>
 						</ul>
 					</li>
 					<li class="has-dropdown">
 						<a href="#">About</a>
 						<ul class="dropdown">
 							<li><a href="#">Über dieses Projekt</a></li>
-							<li class="active"><a href="#">Impressum</a></li>
+							<li><a href="#">Impressum</a></li>
 						</ul>
 					</li>
 					<?php if(isset($_SESSION['loggedIn'])) { ?>

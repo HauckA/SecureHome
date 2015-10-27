@@ -48,6 +48,7 @@
 					$_SESSION["loggedIn"] = 1;
 					$_SESSION["firstname"] = $result["user"]["firstname"];
 					$_SESSION["lastname"] = $result["user"]["lastname"];
+					$_SESSION["email"] = $result["user"]["email"];
 					header("Location: webcam_monitor.php");
 					
 				} else if ($result["success"] == 0) {

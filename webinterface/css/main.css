@@ -5,4 +5,5 @@
 @import "foundation.min.css";
 
 /* Secure@Home Styles */
-@import "secureAtHome.css";
+@import "secure_at_home.css";
+@import "secure_at_home_mobile.css";
