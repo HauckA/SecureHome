@@ -40,7 +40,7 @@ html,
 	text-decoration: none;
 }
 
-#header {
+#mainnavi {
 	background-color: #B61717;
 }
 
@@ -152,3 +152,40 @@ h5,
 	border-bottom-right-radius: 10px;
 }
 
+#header {
+	padding: 20px;
+}
+
+#header .topline {
+	color: #b61717;
+	font-size: 4rem;
+	font-weight: bold;
+	line-height: 100%;
+	margin-top: 10px;
+}
+
+#header .subline {
+	font-size: 1.5rem;
+	color: #262626;
+	font-style: italic;
+}
+
+#header .header_logo {
+	width: 100px;
+	padding: 0px;
+}
+
+#header .header_text {
+	width: auto;
+	float: left;
+	padding-left: 40px;
+}
+
+#header a {
+	color: #b61717;
+}
+
+#header .header_logo img {
+	width: 100%;
+	max-width: 100px;
+}

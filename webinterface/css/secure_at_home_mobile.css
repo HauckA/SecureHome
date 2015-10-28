@@ -1,5 +1,16 @@
-@media screen and (max-width: 620px)
-{
+@media screen and (max-width: 815px) {
+
+	.top-bar form .columns {
+		padding: 0px 0.5rem;
+	}
+
+	.top-bar input {
+		width: 100px;
+	}	
+
+}
+
+@media screen and (max-width: 620px) {
 
 	#maincontent .row .columns {
 		width: 100%;
@@ -9,4 +20,52 @@
 		margin-top: 15px;
 	}
 
+}
+
+
+/*Mainnavi breakpoint*/
+@media screen and (max-width: 45rem) {
+	
+	#header .header_logo {
+		width: 100%;
+		text-align: center;
+	}
+	
+	#header  .columns {
+		float: none;
+		padding: 0px;
+		text-align: center;
+	}
+	
+	#header .topline {
+		font-size: 2rem;
+	}
+	
+	#header .subline {
+		font-size: 1.25rem;
+		line-height: 100%;
+		margin-top: 5px;
+	}
+	
+	#header .header_logo img {
+		width: 75px;
+	}
+	
+	.top-bar input {
+		width: 100%;
+	}	
+	
+	.top-bar.expanded .top-bar-section ul li {
+		border-bottom: 1px solid #fff;
+	}
+	
+	.top-bar.expanded .top-bar-section ul li  a {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	
+	.top-bar.expanded .top-bar-section li.has-dropdown > a::after {
+		border-color: transparent transparent transparent #fff;
+	}
+	
 }

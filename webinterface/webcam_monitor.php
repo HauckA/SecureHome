@@ -22,12 +22,19 @@
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
   </head>
   <body>
-    
-	<div id="header">
+    <div id="header" class="row">
+		<div class="header_logo columns">
+			<a href="index.php"><img src="img/header_logo_r.png"/></a>
+		</div>
+		<div class="header_text columns">
+			<div class="topline"><a href="index.php">Secure@Home</a></div>
+			<div class="subline">Use your Smartphone as a webcam</div>
+		</div>
+	</div>
+	<div id="mainnavi">
 		<nav class="top-bar" data-topbar role="navigation">
 			<ul class="title-area">
 				<li class="name">
-				<h1><a href="index.php">Secure@Home</a></h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -77,7 +84,6 @@
 			
 			<b>Herzlich Willkommen, <?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></b>
 			</p>
-			Hier sehen Sie alle Webcams im Überblick.
 			
 			<div class="row">
 				<div class="large-6 small-6 columns">
