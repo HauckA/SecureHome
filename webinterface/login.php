@@ -16,46 +16,46 @@
 		if(!empty($username) AND !empty($password)) {
 			
 			//CALL API
-				$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/api/index.php";
-				
-				$data = array(
-					"tag" => $tag,
-					"username" => $username,
-					"password" => $password
-				);
-				
-				
-				//open connection
-				$ch = curl_init();
-				
-				curl_setopt($ch, CURLOPT_POST, sizeof($data));
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_URL, $url);
+			$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/api/index.php";
+			
+			$data = array(
+				"tag" => $tag,
+				"username" => $username,
+				"password" => $password
+			);
+			
+			
+			//open connection
+			$ch = curl_init();
+			
+			curl_setopt($ch, CURLOPT_POST, sizeof($data));
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_URL, $url);
 
-				//execute post
-				$result = curl_exec($ch);
+			//execute post
+			$result = curl_exec($ch);
+			
+			//close connection
+			curl_close($ch);
+
+			//decode JSON String
+			$result = (json_decode($result, true));
+
+			if($result["success"] == 1) {
+				//Login successfull
+				$_SESSION["loggedIn"] = 1;
+				$_SESSION["uid"] = $result["uid"];
+				$_SESSION["firstname"] = $result["user"]["firstname"];
+				$_SESSION["lastname"] = $result["user"]["lastname"];
+				$_SESSION["email"] = $result["user"]["email"];
+				header("Location: webcam_monitor.php");
 				
-				//close connection
-				curl_close($ch);
-
-				//decode JSON String
-				$result = (json_decode($result, true));
-
-				if($result["success"] == 1) {
-					
-					//Login successfull
-					$_SESSION["loggedIn"] = 1;
-					$_SESSION["firstname"] = $result["user"]["firstname"];
-					$_SESSION["lastname"] = $result["user"]["lastname"];
-					$_SESSION["email"] = $result["user"]["email"];
-					header("Location: webcam_monitor.php");
-					
-				} else if ($result["success"] == 0) {
-					$errorMessage = "Username oder Passwort ist falsch.";					
-				}	else {
-					$errorMessage ="Fehler beim Login. Bitte später erneut versuchen.";
-				}
+			} else if ($result["success"] == 0) {
+				$errorMessage = "Username oder Passwort ist falsch.";					
+			}	else {
+				$errorMessage ="Fehler beim Login. Bitte später erneut versuchen.";
+			}
 			
 		} else {
 			$errorMessage = "Bitte alle Felder ausfüllen!";

@@ -111,7 +111,33 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 		   echo json_encode($response);
 		}
 		
-	}  
+	}
+	else if($tag == "get_webcams_from_user") {
+	
+		$uid = $_REQUEST['uid'];
+		
+		$webcamsFromUser = $db->getWebcamsFromUser($uid);
+		$numberOfWebcams = count($webcamsFromUser);
+
+		if(count($numberOfWebcams > 0)) {
+			//add each Webcam-ID to the response
+			$response["success"] = 1;
+			$response["numberOfWebcams"] = $numberOfWebcams;
+			for($i=0; $i<$numberOfWebcams; $i++) {
+				$response["webcamID"][$i] = $webcamsFromUser[$i];
+			}
+			
+			
+		} else {
+			$response["success"] = 1;
+			$response["numberOfWebcams"] = 0;
+		}
+	
+		
+		echo json_encode($response);
+		
+	
+	}
 	else {
 	  echo "Invalid Request";
 	 }

@@ -115,6 +115,29 @@ class DB_Functions {
             return false;
         }
     }
+	
+	/*
+	 * Get all IDs of the Webcams that are connected to the user
+	 * Params: User ID
+	 * Return: An Array that contains Webcam IDs
+	*/
+	
+	public function getWebcamsFromUser($uid) {
+		$query = mysql_query("SELECT device_id FROM user_device WHERE user_id = '$uid'");
+				
+		if(mysql_num_rows($query) > 0) {
+			
+			$webcamsOfUser = array();
+			
+			while($row = mysql_fetch_assoc($query)) {
+				array_push($webcamsOfUser, $row["device_id"]);
+				
+			}
+								
+			return $webcamsOfUser;
+			
+		}
+	}
  
     /**
      * Encrypting password

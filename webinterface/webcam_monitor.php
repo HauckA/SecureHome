@@ -6,7 +6,34 @@
 		header("Location: index.php");
 	}
 	
+	//CALL API and get the IDs from the webcams connected to the user
+	$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/api/index.php";
 	
+	$data = array(
+		"tag" => "get_webcams_from_user",
+		"uid" => $_SESSION['uid']
+	);
+	
+	
+	//open connection
+	$ch = curl_init();
+	
+	curl_setopt($ch, CURLOPT_POST, sizeof($data));
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_URL, $url);
+
+	//execute post
+	$result = curl_exec($ch);
+	
+	
+	//close connection
+	curl_close($ch);
+
+	//decode JSON String
+	$result = (json_decode($result, true));
+		
+	print_r($result);
 	
 ?>
 
@@ -82,7 +109,7 @@
 			<h1>Webcam Monitor</h1>
 			<p>
 			
-			<b>Herzlich Willkommen, <?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></b>
+			<b>Herzlich Willkommen, <?php echo $_SESSION['firstname']." ".$_SESSION['lastname'] . $_SESSION["userID"]; ?></b>
 			</p>
 			
 			<div class="row">
