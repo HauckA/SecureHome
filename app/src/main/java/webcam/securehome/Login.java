@@ -66,6 +66,10 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
                 JSONObject json_user = jsonFromDoInBg.getJSONObject("user");
 
                 userid = jsonFromDoInBg.getInt("uid");
+
+                //Speichere userid ins ConfigFile
+                fh.saveFile("userid.config", String.valueOf(userid), loginActivity.getApplicationContext());
+
                 Log.i("userid", String.valueOf(userid));
                 String username = json_user.getString("username");
                 String email = json_user.getString("email");

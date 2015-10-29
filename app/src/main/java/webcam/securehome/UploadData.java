@@ -1,0 +1,83 @@
+package webcam.securehome;
+
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import webcam.securehome.helper.JSONParser;
+
+/**
+ * Created by Sandro on 20.10.2015.
+ */
+public class UploadData extends AsyncTask<String, Void, JSONObject> {
+
+    private JSONParser jsonParser;
+    private WebcamPreviewActivity webcamPreviewActivity;
+
+    private static final String MSG_ERROR1 = "Couldn't connect to the server";
+
+
+
+    //Static Logged UserID
+    private static int userid = 0;
+    private static String URL = null;
+    private static String webcamid = null;
+
+
+
+    private FileHandler fh = new FileHandler();
+
+
+
+    // constructor
+    public UploadData(WebcamPreviewActivity webcamPreviewActivity){
+        this.webcamPreviewActivity = webcamPreviewActivity;
+        jsonParser = new JSONParser();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        URL = fh.getFileContent("webservice_url.config", webcamPreviewActivity.getApplicationContext());
+        userid = Integer.parseInt(fh.getFileContent("userid.config", webcamPreviewActivity.getApplicationContext()));
+        webcamid = fh.getFileContent("webcam_id.config", webcamPreviewActivity.getApplicationContext()).trim();
+    }
+
+
+    @Override
+    protected void onPostExecute(JSONObject jsonFromDoInBg) {
+
+        // check for login response
+        String res = null;
+        String error = null;
+
+        try {
+            res = jsonFromDoInBg.getString("success");
+            if (Integer.parseInt(res) == 1) {
+                Toast.makeText(webcamPreviewActivity.getApplicationContext(), "Daten werden gesendet", Toast.LENGTH_LONG).show();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    protected JSONObject doInBackground(String... params) {
+        List<NameValuePair> paramsPack = new ArrayList<>();
+        paramsPack.add(new BasicNameValuePair("tag", "uploaddata"));
+        paramsPack.add(new BasicNameValuePair("userid", String.valueOf(userid)));
+        paramsPack.add(new BasicNameValuePair("webcamid", String.valueOf(webcamid)));
+        JSONObject json = jsonParser.getJSONFromUrl(URL, paramsPack);
+
+        // return json
+        Log.e("JSON", json.toString());
+        return json;
+    }
+}

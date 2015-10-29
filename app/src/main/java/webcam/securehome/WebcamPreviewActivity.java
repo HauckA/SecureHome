@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import webcam.securehome.helper.CameraView;
 
@@ -68,8 +67,10 @@ public class WebcamPreviewActivity extends AppCompatActivity {
         this.btnStartBroadcast.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-
+                        Log.i("Info", "Button: Übertragung starten gedrückt");
                         //TODO Submit Images to Server
+                        new UploadData(WebcamPreviewActivity.this).execute();
+
 
                     }
                 }
