@@ -7,6 +7,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Alexander on 25.10.2015.
@@ -45,6 +47,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
             return;
 
         try{
+
             mCamera.stopPreview();
         } catch (Exception e){
             //this will happen when you are trying the camera if it's not running
@@ -54,6 +57,14 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         try{
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    mCamera.startPreview();
+                    mCamera.takePicture(null, null, mPicture);
+                }
+            }, 0, 10000);
         } catch (IOException e) {
             Log.d("ERROR", "Camera error on surfaceChanged " + e.getMessage());
         }
@@ -66,4 +77,13 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         mCamera.stopPreview();
         mCamera.release();
     }
+
+    Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            //TODO Upload File to Server
+
+        }
+
+    };
 }
