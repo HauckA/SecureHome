@@ -69,12 +69,7 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 		  } else {
 			  // store user
 			  $user = $db->storeUser($firstname, $lastname, $email, $username, $password);
-			  //create Directory for new User with EMAIL
-			  if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/SecureHome/registratedUserhome/' . $user["email"])) {
-					mkdir($_SERVER['DOCUMENT_ROOT'] . '/SecureHome/registratedUserhome/' . $user["email"], 0777, true);
-					//echo "Ordner erfolgreich erstellt";
-			  }
-			  
+
 			  if ($user) {
 				   // user stored successfully
 				   $response["success"] = 1;
@@ -133,6 +128,30 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 			$response["numberOfWebcams"] = 0;
 		}
 	
+		
+		echo json_encode($response);
+		
+	
+	}
+	else if($tag == "uploaddata") {
+	
+		$uid = $_REQUEST['userid'];
+		$webcam_id = $_REQUEST['webcamid'];
+		
+		//Request mail from user
+		$usermail = $db->getMailByUserid($uid);
+		
+		if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id)) {
+			//Fotos hier abseichern
+					
+					
+			$response["success"] = 1;
+		}
+		else{
+			$response["success"] = 0;
+		}		
+		
+		
 		
 		echo json_encode($response);
 		

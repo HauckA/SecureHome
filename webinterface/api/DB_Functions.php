@@ -34,8 +34,8 @@ class DB_Functions {
 			//echo "Webcam ID: " . $webcam_id;
 			//echo "UserMail ID: " .$user_email;
 			//CAM Ordner in Benutzerordner erstellen
-			if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/SecureHome/registratedUserhome/' . $user_email . "/" . $webcam_id)) {
-					mkdir($_SERVER['DOCUMENT_ROOT'] . '/SecureHome/registratedUserhome/' . $user_email . "/" . $webcam_id, 0777, true);
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id)) {
+					mkdir($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id, 0777, true);
 					//echo "Ordner erfolgreich erstellt";
 			}
 			 
@@ -46,6 +46,19 @@ class DB_Functions {
             return false;
         }
 	}
+	public function getMailByUserid($uid) {
+		$query = "SELECT email from user where id=$uid";
+		$result = mysql_query($query) or die(mysql_error());
+		
+		if ($result) {
+			$user = mysql_fetch_array($result);
+			$user_email = $user['email'];
+            return $user_email;
+        } else {
+            return false;
+        }
+	}
+ 
  
  
     /**
@@ -70,6 +83,13 @@ class DB_Functions {
             // get user details 
             $uid = mysql_insert_id(); // last inserted id
             $result = mysql_query("SELECT * FROM user WHERE id = $uid");
+			
+			 //create Directory for new User with EMAIL
+			  if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user["email"])) {
+					mkdir($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user["email"], 0777, true);
+					//echo "Ordner erfolgreich erstellt";
+			  }
+			  
             // return user details
             return mysql_fetch_array($result);
         } else {
