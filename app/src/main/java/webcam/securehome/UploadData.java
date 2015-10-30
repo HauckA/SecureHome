@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import webcam.securehome.helper.CameraView;
 import webcam.securehome.helper.JSONParser;
 
 /**
@@ -20,7 +21,7 @@ import webcam.securehome.helper.JSONParser;
 public class UploadData extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
-    private WebcamPreviewActivity webcamPreviewActivity;
+    private CameraView cameraView;
 
     private static final String MSG_ERROR1 = "Couldn't connect to the server";
 
@@ -38,16 +39,16 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
 
 
     // constructor
-    public UploadData(WebcamPreviewActivity webcamPreviewActivity){
-        this.webcamPreviewActivity = webcamPreviewActivity;
+    public UploadData(CameraView cameraView){
+        this.cameraView = cameraView;
         jsonParser = new JSONParser();
     }
 
     @Override
     protected void onPreExecute() {
-        URL = fh.getFileContent("webservice_url.config", webcamPreviewActivity.getApplicationContext());
-        userid = Integer.parseInt(fh.getFileContent("userid.config", webcamPreviewActivity.getApplicationContext()));
-        webcamid = fh.getFileContent("webcam_id.config", webcamPreviewActivity.getApplicationContext()).trim();
+        URL = fh.getFileContent("webservice_url.config", cameraView.getContext());
+        userid = Integer.parseInt(fh.getFileContent("userid.config", cameraView.getContext()));
+        webcamid = fh.getFileContent("webcam_id.config", cameraView.getContext()).trim();
     }
 
 
@@ -61,7 +62,7 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
         try {
             res = jsonFromDoInBg.getString("success");
             if (Integer.parseInt(res) == 1) {
-                Toast.makeText(webcamPreviewActivity.getApplicationContext(), "Daten werden gesendet", Toast.LENGTH_LONG).show();
+                Toast.makeText(cameraView.getContext(), "Daten werden gesendet", Toast.LENGTH_LONG).show();
             }
 
         } catch (JSONException e) {
@@ -70,10 +71,12 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     }
     @Override
     protected JSONObject doInBackground(String... params) {
+
         List<NameValuePair> paramsPack = new ArrayList<>();
         paramsPack.add(new BasicNameValuePair("tag", "uploaddata"));
         paramsPack.add(new BasicNameValuePair("userid", String.valueOf(userid)));
         paramsPack.add(new BasicNameValuePair("webcamid", String.valueOf(webcamid)));
+        paramsPack.add(new BasicNameValuePair("imagestr", params[0]));
         JSONObject json = jsonParser.getJSONFromUrl(URL, paramsPack);
 
         // return json

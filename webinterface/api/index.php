@@ -137,13 +137,23 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 	
 		$uid = $_REQUEST['userid'];
 		$webcam_id = $_REQUEST['webcamid'];
+		$str_image = $REQUEST['imagestr'];
+		
 		
 		//Request mail from user
 		$usermail = $db->getMailByUserid($uid);
 		
 		if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id)) {
 			//Fotos hier abseichern
-					
+		
+			//Get a filename
+			$imagefile = $_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id . '/myimage_'.time().'.jpg';
+	 
+			//Decode the image
+			$decodedImage = base64_decode($str_image);
+			 
+			//Write to disk
+			file_put_contents($imagefile, $decodedImage);
 					
 			$response["success"] = 1;
 		}

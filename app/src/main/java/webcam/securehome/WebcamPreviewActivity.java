@@ -69,7 +69,7 @@ public class WebcamPreviewActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Log.i("Info", "Button: Übertragung starten gedrückt");
                         //TODO Submit Images to Server
-                        new UploadData(WebcamPreviewActivity.this).execute();
+
 
 
                     }

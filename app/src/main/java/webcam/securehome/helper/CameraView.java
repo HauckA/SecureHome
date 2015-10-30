@@ -2,6 +2,7 @@ package webcam.securehome.helper;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.util.Base64;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -9,6 +10,8 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import webcam.securehome.UploadData;
 
 /**
  * Created by Alexander on 25.10.2015.
@@ -55,13 +58,13 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
         //now, recreate the camera preview
         try{
+            Log.i("info", "into try");
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    mCamera.startPreview();
                     mCamera.takePicture(null, null, mPicture);
                 }
             }, 0, 10000);
@@ -82,6 +85,8 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
             //TODO Upload File to Server
+            String strImage= Base64.encodeToString(data, Base64.DEFAULT); // image1 is your byte[]
+            new UploadData(CameraView.this).execute(strImage);
 
         }
 
