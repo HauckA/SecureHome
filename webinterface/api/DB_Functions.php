@@ -85,8 +85,8 @@ class DB_Functions {
             $result = mysql_query("SELECT * FROM user WHERE id = $uid");
 			
 			 //create Directory for new User with EMAIL
-			  if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user["email"])) {
-					mkdir($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user["email"], 0777, true);
+			  if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $email)) {
+					mkdir($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $email, 0777, true);
 					//echo "Ordner erfolgreich erstellt";
 			  }
 			  
