@@ -49,6 +49,7 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
         //get URL from config-file
         loginURL = fh.getFileContent("webservice_url.config", this.loginActivity.getApplicationContext()).trim();
+        Log.i("Login URL", loginURL);
 
     }
 
