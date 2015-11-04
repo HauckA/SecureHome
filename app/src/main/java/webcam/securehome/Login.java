@@ -78,8 +78,9 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
 
                 //Read webcamID from config-file and check if it is set or not.
+               // String webcamID = fh.getFileContent("webcam_id.config", loginActivity.getApplicationContext()).trim();
                 String webcamID = fh.getFileContent("webcam_id.config", loginActivity.getApplicationContext()).trim();
-
+Log.i("Webcamid", webcamID);
                 //Check if Device is already registrated as webcam
                 if (webcamID.equals("")) {
                     // Webcam is not registrated: Go to Webcam Registration Activity

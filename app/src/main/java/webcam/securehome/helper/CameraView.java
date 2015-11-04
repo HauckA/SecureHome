@@ -6,27 +6,35 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import webcam.securehome.UploadData;
+import webcam.securehome.WebcamPreviewActivity;
 
 /**
  * Created by Alexander on 25.10.2015.
  */
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
-    public CameraView(Context context, Camera camera){
-        super(context);
+    Button btnStartBroadcast = null;
+    UploadData uploadData = null;
+    WebcamPreviewActivity webcamPreviewActivity = null;
 
+    public CameraView(Context context, Camera camera, Button btnStartBroadcast,  WebcamPreviewActivity webcamPreviewActivity){
+        super(context);
+        this.btnStartBroadcast = btnStartBroadcast;
         mCamera = camera;
         mCamera.setDisplayOrientation(90);
         //get the holder and set this class as the callback, so we can get camera data here
         mHolder = getHolder();
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_NORMAL);
+        this.webcamPreviewActivity = webcamPreviewActivity;
+        uploadData = new UploadData(this, webcamPreviewActivity);
+
     }
 
     private SurfaceHolder mHolder;
@@ -34,10 +42,23 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
         try{
+            Log.i("Info", "Enter ini surface Createt");
+
             //when the surface is created, we can set the camera to draw images in this surfaceholder
             mCamera.setPreviewDisplay(surfaceHolder);
             mCamera.startPreview();
+            this.btnStartBroadcast.setOnClickListener(
+                    new Button.OnClickListener() {
+                        public void onClick(View v) {
+                            Log.i("Info", "Button: Übertragung starten gedrückt");
+                            mCamera.takePicture(null, null, mPicture);
+
+
+                        }
+                    }
+            );
         } catch (IOException e) {
             Log.d("ERROR", "Camera error on surfaceCreated " + e.getMessage());
         }
@@ -52,22 +73,14 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         try{
 
             mCamera.stopPreview();
-        } catch (Exception e){
+        } catch (Exception e) {
             //this will happen when you are trying the camera if it's not running
         }
 
         //now, recreate the camera preview
         try{
-            Log.i("info", "into try");
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    mCamera.takePicture(null, null, mPicture);
-                }
-            }, 0, 10000);
         } catch (IOException e) {
             Log.d("ERROR", "Camera error on surfaceChanged " + e.getMessage());
         }
@@ -86,7 +99,8 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         public void onPictureTaken(byte[] data, Camera camera) {
             //TODO Upload File to Server
             String strImage= Base64.encodeToString(data, Base64.DEFAULT); // image1 is your byte[]
-            new UploadData(CameraView.this).execute(strImage);
+            uploadData.execute(strImage);
+            mCamera.takePicture(null, null, mPicture);
 
         }
 

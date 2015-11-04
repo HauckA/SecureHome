@@ -1,7 +1,7 @@
 <?php
 //header("Content-Type: application/json; charset=utf-8", true);
-ini_set('display_errors', 'Off');
-//error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 /**
  * File to handle all API requests
  * Accepts GET and POST
@@ -15,9 +15,9 @@ ini_set('display_errors', 'Off');
  */
 
  
-if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
+if (isset($_POST['tag']) && $_POST['tag'] != '') {
 
- $tag = $_REQUEST['tag'];
+ $tag = $_POST['tag'];
  
  // include db handler
  require_once 'DB_Functions.php';
@@ -29,8 +29,8 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
  // check for tag type
 	 if ($tag == 'login') {
 		  // Request type is check Login
-		  $username = $_REQUEST['username'];
-		  $password = $_REQUEST['password'];
+		  $username = $_POST['username'];
+		  $password = $_POST['password'];
 		  mysql_select_db("db_homesecure");
 		  // check for user
 		  $user = $db->getUserByUsernameAndPassword($username, $password);
@@ -55,11 +55,11 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 		  }
 	 }else if ($tag == 'register') {
 		  // Request type is Register new user
-		  $firstname = $_REQUEST['firstname'];
-		  $lastname = $_REQUEST['lastname'];
-		  $email = $_REQUEST['email'];
-		  $username = $_REQUEST['username'];
-		  $password = $_REQUEST['password'];
+		  $firstname = $_POST['firstname'];
+		  $lastname = $_POST['lastname'];
+		  $email = $_POST['email'];
+		  $username = $_POST['username'];
+		  $password = $_POST['password'];
 		  // check if user is already existed
 		  if ($db->isUserExisted($email)) {
 			  // user is already existed - error response
@@ -89,8 +89,8 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 			}
 	  }
 	else if($tag == 'webcam_registration'){
-		$user_id  = $_REQUEST['user_id'];
-		$webcam_description  = $_REQUEST['webcam_description'];
+		$user_id  = $_POST['user_id'];
+		$webcam_description  = $_POST['webcam_description'];
 		
 		$webcam = $db->registerWebcam($user_id, $webcam_description);
 		
@@ -109,7 +109,7 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 	}
 	else if($tag == "get_webcams_from_user") {
 	
-		$uid = $_REQUEST['uid'];
+		$uid = $_POST['uid'];
 		
 		$webcamsFromUser = $db->getWebcamsFromUser($uid);
 		$numberOfWebcams = count($webcamsFromUser);
@@ -134,20 +134,20 @@ if (isset($_REQUEST['tag']) && $_REQUEST['tag'] != '') {
 	
 	}
 	else if($tag == "uploaddata") {
-	
-		$uid = $_REQUEST['userid'];
-		$webcam_id = $_REQUEST['webcamid'];
-		$str_image = $REQUEST['imagestr'];
+
+		$uid = $_POST['userid'];
+		$webcam_id = $_POST['webcamid'];
+		$str_image = $_POST['imagestr'];
 		
 		
 		//Request mail from user
-		$usermail = $db->getMailByUserid($uid);
-		
-		if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id)) {
+		$user_email = $db->getMailByUserid($uid);
+	
+		if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id)) {
 			//Fotos hier abseichern
 		
 			//Get a filename
-			$imagefile = $_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id . '/myimage_'.time().'.jpg';
+			$imagefile = $_SERVER['DOCUMENT_ROOT'] . '/api/registratedUserhome/' . $user_email . "/" . $webcam_id . '/cam'.$webcam_id.'_'.time().'.jpg';
 	 
 			//Decode the image
 			$decodedImage = base64_decode($str_image);
