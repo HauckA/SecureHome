@@ -1,7 +1,6 @@
 package webcam.securehome;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -24,8 +23,8 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     private CameraView cameraView;
     private WebcamPreviewActivity webcamPreviewActivity;
 
-    private static final String MSG_ERROR1 = "Couldn't connect to the server";
 
+    private static final String MSG_ERROR1 = "Couldn't connect to the server";
 
 
     //Static Logged UserID
@@ -33,11 +32,7 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     private static String URL = null;
     private static String webcamid = null;
 
-
-
     private FileHandler fh = new FileHandler();
-
-
 
     // constructor
     public UploadData(CameraView cameraView,  WebcamPreviewActivity webcamPreviewActivity){
@@ -56,7 +51,6 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject jsonFromDoInBg) {
-
         // check for login response
         String res = null;
         String error = null;
@@ -66,7 +60,6 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
             if (Integer.parseInt(res) == 1) {
                 Toast.makeText(cameraView.getContext(), "Daten werden gesendet", Toast.LENGTH_LONG).show();
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -80,7 +73,7 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
         paramsPack.add(new BasicNameValuePair("imagestr", params[0]));
         JSONObject json = jsonParser.getJSONFromUrl(URL, paramsPack);
 
-        Log.e("JSON", json.toString());
+        //Log.e("JSON", json.toString());
         return json;
     }
 }

@@ -20,8 +20,11 @@ import webcam.securehome.WebcamPreviewActivity;
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
     Button btnStartBroadcast = null;
-    UploadData uploadData = null;
+   // UploadData uploadData = null;
     WebcamPreviewActivity webcamPreviewActivity = null;
+    private SurfaceHolder mHolder;
+    private Camera mCamera;
+    private boolean finish = false;
 
     public CameraView(Context context, Camera camera, Button btnStartBroadcast,  WebcamPreviewActivity webcamPreviewActivity){
         super(context);
@@ -33,12 +36,9 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_NORMAL);
         this.webcamPreviewActivity = webcamPreviewActivity;
-        uploadData = new UploadData(this, webcamPreviewActivity);
+        //uploadData = new UploadData(this, webcamPreviewActivity);
 
     }
-
-    private SurfaceHolder mHolder;
-    private Camera mCamera;
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
@@ -54,8 +54,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
                         public void onClick(View v) {
                             Log.i("Info", "Button: Übertragung starten gedrückt");
                             mCamera.takePicture(null, null, mPicture);
-
-
                         }
                     }
             );
@@ -71,8 +69,8 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
             return;
 
         try{
-
             mCamera.stopPreview();
+            finish = true;
         } catch (Exception e) {
             //this will happen when you are trying the camera if it's not running
         }
@@ -81,6 +79,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         try{
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
+            finish = false;
         } catch (IOException e) {
             Log.d("ERROR", "Camera error on surfaceChanged " + e.getMessage());
         }
@@ -90,8 +89,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
         //our app has only one screen, so we'll destroy the camera in the surface
         //if you are unsing with more screens, please move this code your activity
+        finish = true;
         mCamera.stopPreview();
         mCamera.release();
+
     }
 
     Camera.PictureCallback mPicture = new Camera.PictureCallback() {
@@ -99,10 +100,15 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         public void onPictureTaken(byte[] data, Camera camera) {
             //TODO Upload File to Server
             String strImage= Base64.encodeToString(data, Base64.DEFAULT); // image1 is your byte[]
-            uploadData.execute(strImage);
-            mCamera.takePicture(null, null, mPicture);
-
+            new UploadData(CameraView.this, webcamPreviewActivity).execute(strImage);
+           if(!finish) {
+               try {
+                   Thread.sleep(10000);
+                   mCamera.takePicture(null, null, mPicture);
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+           }
         }
-
     };
 }
