@@ -21,7 +21,6 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
     private CameraView cameraView;
-    private WebcamPreviewActivity webcamPreviewActivity;
 
 
     private static final String MSG_ERROR1 = "Couldn't connect to the server";
@@ -35,9 +34,8 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     private FileHandler fh = new FileHandler();
 
     // constructor
-    public UploadData(CameraView cameraView,  WebcamPreviewActivity webcamPreviewActivity){
+    public UploadData(CameraView cameraView){
         this.cameraView = cameraView;
-        this.webcamPreviewActivity = webcamPreviewActivity;
         jsonParser = new JSONParser();
     }
 
@@ -58,7 +56,7 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
         try {
             res = jsonFromDoInBg.getString("success");
             if (Integer.parseInt(res) == 1) {
-                Toast.makeText(cameraView.getContext(), "Daten werden gesendet", Toast.LENGTH_LONG).show();
+                Toast.makeText(cameraView.getContext(), "Foto wurde gesendet", Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -73,7 +71,6 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
         paramsPack.add(new BasicNameValuePair("imagestr", params[0]));
         JSONObject json = jsonParser.getJSONFromUrl(URL, paramsPack);
 
-        //Log.e("JSON", json.toString());
         return json;
     }
 }

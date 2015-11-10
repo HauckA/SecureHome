@@ -57,7 +57,7 @@ public class WebcamPreviewActivity extends AppCompatActivity {
         }
 
         if(mCamera != null) {
-            mCameraView = new CameraView(this, mCamera, btnStartBroadcast, WebcamPreviewActivity.this);//create a SurfaceView to show camera data
+            mCameraView = new CameraView(this, mCamera, btnStartBroadcast);//create a SurfaceView to show camera data
             FrameLayout camera_view = (FrameLayout)findViewById(R.id.frameLayout);
             camera_view.addView(mCameraView);//add the SurfaceView to the ImageView
         }

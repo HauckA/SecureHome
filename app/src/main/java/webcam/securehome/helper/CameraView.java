@@ -12,7 +12,6 @@ import android.widget.Button;
 import java.io.IOException;
 
 import webcam.securehome.UploadData;
-import webcam.securehome.WebcamPreviewActivity;
 
 /**
  * Created by Alexander on 25.10.2015.
@@ -20,13 +19,11 @@ import webcam.securehome.WebcamPreviewActivity;
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
     Button btnStartBroadcast = null;
-   // UploadData uploadData = null;
-    WebcamPreviewActivity webcamPreviewActivity = null;
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private boolean finish = false;
 
-    public CameraView(Context context, Camera camera, Button btnStartBroadcast,  WebcamPreviewActivity webcamPreviewActivity){
+    public CameraView(Context context, Camera camera, Button btnStartBroadcast){
         super(context);
         this.btnStartBroadcast = btnStartBroadcast;
         mCamera = camera;
@@ -35,8 +32,16 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         mHolder = getHolder();
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_NORMAL);
-        this.webcamPreviewActivity = webcamPreviewActivity;
-        //uploadData = new UploadData(this, webcamPreviewActivity);
+
+        //Set onClick Listener
+        this.btnStartBroadcast.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Log.i("Info", "Button: Übertragung starten gedrückt");
+                        mCamera.takePicture(null, null, mPicture);
+                    }
+                }
+        );
 
     }
 
@@ -44,19 +49,9 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
         try{
-            Log.i("Info", "Enter ini surface Createt");
-
-            //when the surface is created, we can set the camera to draw images in this surfaceholder
+             //when the surface is created, we can set the camera to draw images in this surfaceholder
             mCamera.setPreviewDisplay(surfaceHolder);
             mCamera.startPreview();
-            this.btnStartBroadcast.setOnClickListener(
-                    new Button.OnClickListener() {
-                        public void onClick(View v) {
-                            Log.i("Info", "Button: Übertragung starten gedrückt");
-                            mCamera.takePicture(null, null, mPicture);
-                        }
-                    }
-            );
         } catch (IOException e) {
             Log.d("ERROR", "Camera error on surfaceCreated " + e.getMessage());
         }
@@ -67,7 +62,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         //before changing the application orientation, you need to stop the preview, rotate and then start it again
         if(mHolder.getSurface() == null)//check if the surface is ready to receive camera data
             return;
-
         try{
             mCamera.stopPreview();
             finish = true;
@@ -100,10 +94,11 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         public void onPictureTaken(byte[] data, Camera camera) {
             //TODO Upload File to Server
             String strImage= Base64.encodeToString(data, Base64.DEFAULT); // image1 is your byte[]
-            new UploadData(CameraView.this, webcamPreviewActivity).execute(strImage);
+            new UploadData(CameraView.this).execute(strImage);
            if(!finish) {
                try {
-                   Thread.sleep(10000);
+                   //Take all 10 sec a photo
+                   Thread.sleep(5000);
                    mCamera.takePicture(null, null, mPicture);
                } catch (InterruptedException e) {
                    e.printStackTrace();
