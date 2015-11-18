@@ -5,7 +5,9 @@
 	//Check if the user is already logged in
 	if(isset($_SESSION['loggedIn']) && $_SESSION["loggedIn"] == 1) {
 		header("Location: webcam_monitor.php");
+		exit;
 	}
+	
 	
 	if(isset($_REQUEST['login'])) {
 		$username = $_REQUEST['username'];
@@ -17,7 +19,7 @@
 			
 			//CALL API
 			$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/api/index.php";
-			
+
 			$data = array(
 				"tag" => $tag,
 				"username" => $username,
@@ -35,13 +37,12 @@
 
 			//execute post
 			$result = curl_exec($ch);
-			
 			//close connection
 			curl_close($ch);
 
 			//decode JSON String
 			$result = (json_decode($result, true));
-
+			
 			if($result["success"] == 1) {
 				//Login successfull
 				$_SESSION["loggedIn"] = 1;
@@ -165,7 +166,7 @@
 						</div>
 						<div class="large-6 columns">
 							<label>Passwort</label>
-						  <input type="text" name="password"/>
+						  <input type="password" name="password"/>
 						</div>
 					  </div>
 					  <div class="row">

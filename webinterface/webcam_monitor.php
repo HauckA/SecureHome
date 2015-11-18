@@ -4,6 +4,7 @@
 	//Check if user is logged in, if not forward to index.php
 	if($_SESSION['loggedIn'] != 1) {
 		header("Location: index.php");
+		exit;
 	}
 	
 	//CALL API and get the IDs from the webcams connected to the user
@@ -26,15 +27,10 @@
 	//execute post
 	$result = curl_exec($ch);
 	
-	
-	//close connection
-	curl_close($ch);
-
+	//Connection gets closed below!!
 	//decode JSON String
 	$result = (json_decode($result, true));
-		
-	print_r($result);
-	
+
 ?>
 
 <!doctype html>
@@ -109,68 +105,82 @@
 			<h1>Webcam Monitor</h1>
 			<p>
 			
-			<b>Herzlich Willkommen, <?php echo $_SESSION['firstname']." ".$_SESSION['lastname'] . $_SESSION["userID"]; ?></b>
+			<b>Herzlich Willkommen, <?php echo $_SESSION['firstname']." ".$_SESSION['lastname'] ?></b>
 			</p>
 			
 			<div class="row">
-				<div class="large-6 small-6 columns">
-					<div class="webcam">
-						<h5><a href="webcam_detail.php">Beschreibung Webcam1</a></h5>
-						<div class="webcam_content">
-							<div class="status_image">
-								<img src="img/webcam_offline.png" alt="Webcam" />
-								offline
-							</div>
-							<div class="webcam_image">
-								<a href="webcam_detail.php?id=xy">
-									<img src="img/placeholder.jpg" />
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="large-6 small-6 columns">
-					<div class="webcam">
-						<h5><a href="webcam_detail.php">Beschreibung Webcam2</a></h5>
-						<div class="webcam_content">
-							<div class="status_image">
-								<img src="img/webcam_online.png" alt="Webcam" />
-								online
-							</div>
-							<div class="webcam_image">
-								<a href="webcam_detail.php?id=xy">
-									<img src="img/placeholder.jpg" />
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>				
-			</div>
-			<div class="row">
-				<div class="large-6 small-6 columns">
-					<div class="webcam">
-						<h5><a href="webcam_detail.php">Beschreibung Webcam3</a></h5>
-						<div class="webcam_content">
-							<div class="status_image">
-								<img src="img/webcam_online.png" alt="Webcam" />
-								online
-							</div>
-							<div class="webcam_image">
-								<a href="webcam_detail.php?id=xy">
-									<img src="img/placeholder.jpg" />
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="large-6 small-6 columns">
+			
+				<?php
+						
+						
+					for($i=0; $i<$result['numberOfWebcams']; $i++) {
+					
+						$webcamID = $result['webcamID'][$i];
+					
+					
+						$data2 = array(
+							"tag" => "getWebcamInfos",
+							"webcamID" => $webcamID
+						);
+						
+											
+						curl_setopt($ch, CURLOPT_POST, sizeof($data2));
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $data2);
 
-				</div>				
+						//execute post
+						$result2 = curl_exec($ch);
+						
+						//decode JSON String
+						$result2 = (json_decode($result2, true));
+				
+						
+						?>
+						
+						
+						
+							<div class="large-6 small-6 columns">
+								<div class="webcam">
+									<h5><a href="webcam_detail.php?id=<?php echo "$webcamID"; ?>"><?php echo $result2['description'];?></a></h5>
+									<div class="webcam_content">
+										<div class="status_image">
+											<?php
+												if($result2['isActive'] == 0) {
+													echo " <img src=\"img/webcam_offline.png\" alt=\"Webcam\" /> offline";
+												} elseif($result2['isActive'] == 1) {
+													echo " <img src=\"img/webcam_online.png\" alt=\"Webcam\" /> online";
+												}
+											?>
+											
+										</div>
+										<div class="webcam_image">
+											<a href="webcam_detail.php?id=<?php echo "$webcamID";?>">
+												<img src="img/placeholder.jpg" />
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+						<?php
+						
+						if($i % 2 != 0) {
+							echo "
+								</div>
+								<div class=\"row\">
+								";
+						}
+						
+					}
+					
+					//close connection
+					curl_close($ch);
+				?>
+			
 			</div>
 			
 			<!-- 
 				TODO: 
-				- Get Webcamdescription by UserId
+
 				- If no Webcam has been registrated, show info
 				- Show if Webcam is recording or not (green/red dot)
 				- Nice to have: Change position of camera with drag & drop

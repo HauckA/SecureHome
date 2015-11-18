@@ -4,6 +4,7 @@
 	//Check if user is logged in, if not forward to index.php
 	if($_SESSION['loggedIn'] != 1) {
 		header("Location: index.php");
+		exit;
 	}
 	
 	

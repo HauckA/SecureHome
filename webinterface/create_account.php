@@ -29,6 +29,7 @@
 				);
 				
 				
+			
 				//open connection
 				$ch = curl_init();
 				
@@ -45,7 +46,7 @@
 
 				//decode JSON String
 				$result = (json_decode($result, true));
-
+				
 				if($result["success"] == 1) {
 					$successMessage = "Konto erfolgreich erstellt.";
 				} else if ($result["success"] == 0) {

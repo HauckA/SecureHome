@@ -1,7 +1,7 @@
 <?php
 //header("Content-Type: application/json; charset=utf-8", true);
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
+#ini_set('display_errors', 'On');
+#error_reporting(E_ALL);
 /**
  * File to handle all API requests
  * Accepts GET and POST
@@ -131,6 +131,24 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		
 		echo json_encode($response);
 		
+	
+	}
+	else if($tag == "getWebcamInfos") {
+	
+		$id = $_POST['webcamID'];
+		
+		//Request status and description of Webcam
+		$webcamInfos = $db->getWebcamInfos($id);
+		if(count($webcamInfos) == 2) {
+			$response["success"] = 1;
+			$response["isActive"] = $webcamInfos[0];
+			$response["description"] = $webcamInfos[1];
+		} else {
+			$response["success"] = 0;
+		}
+		
+		
+		echo json_encode($response);
 	
 	}
 	else if($tag == "uploaddata") {

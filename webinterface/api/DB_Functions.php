@@ -159,6 +159,30 @@ class DB_Functions {
 		}
 	}
  
+ /*
+	 * Get all information of a webcam
+	 * Params: Webcam ID
+	 * Return: An Array with the status and description of the webcam
+	*/
+	
+	public function getWebcamInfos($id) {
+		$query = mysql_query("SELECT isActive, description FROM device WHERE id = '$id'");
+				
+		if(mysql_num_rows($query) > 0) {
+			
+			$webcamInfos = array();
+			
+			while($row = mysql_fetch_assoc($query)) {
+				array_push($webcamInfos, $row["isActive"]);
+				array_push($webcamInfos, $row["description"]);
+				
+			}
+						
+			return $webcamInfos;
+			
+		}
+	}
+ 
     /**
      * Encrypting password
      * @param password
