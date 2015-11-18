@@ -95,6 +95,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
             //TODO Upload File to Server
             String strImage= Base64.encodeToString(data, Base64.DEFAULT); // image1 is your byte[]
             new UploadData(CameraView.this).execute(strImage);
+            mCamera.startPreview();
            if(!finish) {
                try {
                    //Take all 10 sec a photo
