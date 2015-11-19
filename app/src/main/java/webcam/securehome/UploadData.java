@@ -42,8 +42,9 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPreExecute() {
         URL = fh.getFileContent("webservice_url.config", cameraView.getContext());
-        userid = Integer.parseInt(fh.getFileContent("userid.config", cameraView.getContext()));
-       webcamid = fh.getFileContent("webcam_id.config", cameraView.getContext()).trim();
+
+        userid = Login.userid;
+        webcamid = fh.getFileContent(String.valueOf(Login.userid)+".config", cameraView.getContext()).trim();
     }
 
 

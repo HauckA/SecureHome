@@ -68,9 +68,6 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
                 userid = jsonFromDoInBg.getInt("uid");
 
-                //Speichere userid ins ConfigFile
-                fh.saveFile("userid.config", String.valueOf(userid), loginActivity.getApplicationContext());
-
                 Log.i("userid", String.valueOf(userid));
                 String username = json_user.getString("username");
                 String email = json_user.getString("email");
@@ -78,9 +75,11 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
 
 
                 //Read webcamID from config-file and check if it is set or not.
-               // String webcamID = fh.getFileContent("webcam_id.config", loginActivity.getApplicationContext()).trim();
-                String webcamID = fh.getFileContent("webcam_id.config", loginActivity.getApplicationContext()).trim();
-Log.i("Webcamid", webcamID);
+
+              //  String webcamID = fh.getFileContent("webcam_id.config", loginActivity.getApplicationContext()).trim();
+                String webcamID = fh.getFileContent(String.valueOf(userid) +".config", loginActivity.getApplicationContext()).trim();
+
+                Log.i("Webcamid", webcamID);
                 //Check if Device is already registrated as webcam
                 if (webcamID.equals("")) {
                     // Webcam is not registrated: Go to Webcam Registration Activity

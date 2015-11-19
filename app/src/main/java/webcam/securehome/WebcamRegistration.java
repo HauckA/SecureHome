@@ -60,8 +60,8 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
                 webcamId = jsonFromDoInBg.getInt("webcam_id");
                 Log.i("Registrated Cam ID", String.valueOf(webcamId));
 
-                //Save the new ID in the local config file
-                fh.saveFile("webcam_id.config", Integer.toString(webcamId), this.webcamRegistrationActivity.getApplicationContext());
+                //Save the new ID in the local config file from the current user
+                fh.saveFile(String.valueOf(Login.userid)+".config", Integer.toString(webcamId), this.webcamRegistrationActivity.getApplicationContext());
 
                 // Go To WebcamPreview Activity
                 Intent intent = new Intent(webcamRegistrationActivity, WebcamPreviewActivity.class);
