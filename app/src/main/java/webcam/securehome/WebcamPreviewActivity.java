@@ -29,6 +29,7 @@ public class WebcamPreviewActivity extends AppCompatActivity {
 
     //Button declaration
     private Button btnStartBroadcast = null;
+    private Button btnCancelBroadcast = null;
 
     //ImagePreview
     private ImageView imageView = null;
@@ -42,6 +43,7 @@ public class WebcamPreviewActivity extends AppCompatActivity {
 
         //Button generation
         this.btnStartBroadcast = (Button) findViewById(R.id.btnStartBroadcast);
+        this.btnCancelBroadcast = (Button) findViewById(R.id.btnCancelBroadcast);
 
         //ImageView generation
         this.imageView = (ImageView) findViewById(R.id.imageView);
@@ -57,7 +59,7 @@ public class WebcamPreviewActivity extends AppCompatActivity {
         }
 
         if(mCamera != null) {
-            mCameraView = new CameraView(this, mCamera, btnStartBroadcast);//create a SurfaceView to show camera data
+            mCameraView = new CameraView(this, mCamera, btnStartBroadcast, btnCancelBroadcast);//create a SurfaceView to show camera data
             FrameLayout camera_view = (FrameLayout)findViewById(R.id.frameLayout);
             camera_view.addView(mCameraView);//add the SurfaceView to the ImageView
         }

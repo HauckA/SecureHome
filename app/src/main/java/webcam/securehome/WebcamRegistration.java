@@ -88,7 +88,7 @@ public class WebcamRegistration extends AsyncTask<String, Void, JSONObject> {
         JSONObject json = jsonParser.getJSONFromUrl(webcam_registration_URL, paramsPack);
 
         // return json
-        Log.e("JSON", json.toString());
+        //Log.e("JSON", json.toString());
         return json;
     }
 }

@@ -118,7 +118,7 @@ public class Login extends AsyncTask<String, Void, JSONObject> {
         JSONObject json = jsonParser.getJSONFromUrl(loginURL, paramsPack);
 
         // return json
-        Log.e("JSON", json.toString());
+       // Log.e("JSON", json.toString());
         return json;
     }
 }

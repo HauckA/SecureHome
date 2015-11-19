@@ -15,16 +15,12 @@ import webcam.securehome.helper.CameraView;
 import webcam.securehome.helper.JSONParser;
 
 /**
- * Created by Sandro on 20.10.2015.
+ * Created by Sandro on 19.11.2015.
  */
-public class UploadData extends AsyncTask<String, Void, JSONObject> {
+public class UpdateStatus extends AsyncTask<String, Void, JSONObject> {
 
     private JSONParser jsonParser;
     private CameraView cameraView;
-
-
-    private static final String MSG_ERROR1 = "Couldn't connect to the server";
-
 
     //Static Logged UserID
     private static int userid = 0;
@@ -34,7 +30,7 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     private FileHandler fh = new FileHandler();
 
     // constructor
-    public UploadData(CameraView cameraView){
+    public UpdateStatus(CameraView cameraView){
         this.cameraView = cameraView;
         jsonParser = new JSONParser();
     }
@@ -42,7 +38,6 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPreExecute() {
         URL = fh.getFileContent("webservice_url.config", cameraView.getContext());
-
         userid = Login.userid;
         webcamid = fh.getFileContent(String.valueOf(Login.userid)+".config", cameraView.getContext()).trim();
     }
@@ -57,7 +52,7 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
         try {
             res = jsonFromDoInBg.getString("success");
             if (Integer.parseInt(res) == 1) {
-                Toast.makeText(cameraView.getContext(), "Foto wurde gesendet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(cameraView.getContext(), "Übertragungsstatus geändert", Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -66,12 +61,12 @@ public class UploadData extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected JSONObject doInBackground(String... params) {
         List<NameValuePair> paramsPack = new ArrayList<>();
-        paramsPack.add(new BasicNameValuePair("tag", "uploaddata"));
+        paramsPack.add(new BasicNameValuePair("tag", "updateCamStatus"));
         paramsPack.add(new BasicNameValuePair("userid", String.valueOf(userid)));
         paramsPack.add(new BasicNameValuePair("webcamid", String.valueOf(webcamid)));
-        paramsPack.add(new BasicNameValuePair("imagestr", params[0]));
+        paramsPack.add(new BasicNameValuePair("finish", params[0]));
         JSONObject json = jsonParser.getJSONFromUrl(URL, paramsPack);
-      //  Log.e("JSON Upload Data", json.toString());
+        //Log.e("UpdateStatus", json.toString());
         return json;
     }
 }

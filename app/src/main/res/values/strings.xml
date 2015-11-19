@@ -24,4 +24,5 @@
     <string name="txtRegistrateWebcamButton">Webcam registrieren</string>
     <string name="txtWebcamDescription">Beschreibung (z.B. Standort, Stockwerk, )</string>
     <string name="txtWebcamRegistrationInfo">Dieses Gerät wurde noch nicht als Webcam registriert. Bitte geben Sie eine kurzbeschreibung zu diesem Gerät ein:</string>
+    <string name="txtCancelBroadcast">Beenden</string>
 </resources>

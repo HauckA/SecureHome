@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import java.io.IOException;
 
+import webcam.securehome.UpdateStatus;
 import webcam.securehome.UploadData;
 
 /**
@@ -19,15 +20,18 @@ import webcam.securehome.UploadData;
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
     Button btnStartBroadcast = null;
+    Button btnCancelBroadcast = null;
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private boolean finish = false;
 
-    public CameraView(Context context, Camera camera, Button btnStartBroadcast){
+    public CameraView(Context context, Camera camera, Button btnStartBroadcast, Button btnCancelBroadcast){
         super(context);
         this.btnStartBroadcast = btnStartBroadcast;
+        this.btnCancelBroadcast = btnCancelBroadcast;
         mCamera = camera;
         mCamera.setDisplayOrientation(90);
+
         //get the holder and set this class as the callback, so we can get camera data here
         mHolder = getHolder();
         mHolder.addCallback(this);
@@ -38,7 +42,20 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Log.i("Info", "Button: Übertragung starten gedrückt");
+                        finish=false;
+                        new UpdateStatus(CameraView.this).execute(String.valueOf(finish));
                         mCamera.takePicture(null, null, mPicture);
+                    }
+                }
+        );
+        this.btnCancelBroadcast.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Log.i("Info", "Button: Cancel gedrückt");
+                        //Beende Upload
+                        finish=true;
+                        //Update Database
+                        new UpdateStatus(CameraView.this).execute(String.valueOf(finish));
                     }
                 }
         );
@@ -94,9 +111,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
         public void onPictureTaken(byte[] data, Camera camera) {
             //TODO Upload File to Server
             String strImage= Base64.encodeToString(data, Base64.DEFAULT); // image1 is your byte[]
-            new UploadData(CameraView.this).execute(strImage);
-            mCamera.startPreview();
+
+            //mCamera.startPreview();
            if(!finish) {
+               new UploadData(CameraView.this).execute(strImage);
                try {
                    //Take all 10 sec a photo
                    Thread.sleep(5000);

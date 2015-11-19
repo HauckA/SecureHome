@@ -1,7 +1,7 @@
 <?php
 //header("Content-Type: application/json; charset=utf-8", true);
-#ini_set('display_errors', 'On');
-#error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 /**
  * File to handle all API requests
  * Accepts GET and POST
@@ -178,12 +178,34 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		else{
 			$response["success"] = 0;
 		}		
-		
-		
-		
 		echo json_encode($response);
+	}
+	else if($tag == "updateCamStatus") {
+
+		$uid = $_POST['userid'];
+		$webcam_id = $_POST['webcamid'];
+		$finish = $_POST['finish'];		
 		
-	
+		if($finish=="true"){
+			$result=$db->setCamToInactive($uid,$webcam_id);	
+			if($result){
+				$response["success"] = 1;
+			}
+			else{
+				$response["success"] = 0;
+			}
+		}
+		else{
+			$result=$db->setCamToActive($uid,$webcam_id);
+			if($result){
+				$response["success"] = 1;
+			}
+			else{
+				$response["success"] = 0;
+			}
+		}
+		echo json_encode($response);
+
 	}
 	else {
 	  echo "Invalid Request";

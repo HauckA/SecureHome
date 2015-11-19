@@ -182,6 +182,38 @@ class DB_Functions {
 			
 		}
 	}
+	 /**
+	  * Set Cam to active
+	  * @param userid,webcam_id
+	  * 
+	 */
+	 public function setCamToActive($userid,$webcam_id) {
+		$query = mysql_query("UPDATE user_device SET isActive=1 WHERE device_id=$webcam_id and user_id=$userid");
+	
+		// check for successful UPDATE
+		if ($query) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	 /**
+	  * Set Cam to Inactive
+	  * @param userid,webcam_id
+	  * 
+	 */
+	 public function setCamToInactive($userid,$webcam_id) {
+		
+		$query = mysql_query("UPDATE user_device SET isActive=0 WHERE device_id=$webcam_id and user_id=$userid");
+	
+		// check for successful UPDATE
+		if ($query) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+ 
  
     /**
      * Encrypting password
