@@ -1,7 +1,7 @@
 <?php
 //header("Content-Type: application/json; charset=utf-8", true);
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
+#ini_set('display_errors', 'On');
+#error_reporting(E_ALL);
 /**
  * File to handle all API requests
  * Accepts GET and POST
@@ -53,7 +53,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 			  $response["error_msg"] = "Incorrect username or password!";
 			  echo json_encode($response);
 		  }
-	 }else if ($tag == 'register') {
+	 } else if ($tag == 'register') {
 		  // Request type is Register new user
 		  $firstname = $_POST['firstname'];
 		  $lastname = $_POST['lastname'];
@@ -88,7 +88,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 	  
 			}
 	  }
-	else if($tag == 'webcam_registration'){
+	  else if($tag == 'webcam_registration'){
 		$user_id  = $_POST['user_id'];
 		$webcam_description  = $_POST['webcam_description'];
 		
@@ -106,8 +106,8 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		   echo json_encode($response);
 		}
 		
-	}
-	else if($tag == "get_webcams_from_user") {
+	  }
+	  else if($tag == "get_webcams_from_user") {
 	
 		$uid = $_POST['uid'];
 		
@@ -132,8 +132,8 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		echo json_encode($response);
 		
 	
-	}
-	else if($tag == "getWebcamInfos") {
+	  }
+	  else if($tag == "getWebcamInfos") {
 	
 		$id = $_POST['webcamID'];
 		
@@ -150,8 +150,8 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		
 		echo json_encode($response);
 	
-	}
-	else if($tag == "uploaddata") {
+	  }
+	  else if($tag == "uploaddata") {
 
 		$uid = $_POST['userid'];
 		$webcam_id = $_POST['webcamid'];
@@ -178,14 +178,19 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		else{
 			$response["success"] = 0;
 		}		
+	
 		echo json_encode($response);
-	}
-	else if($tag == "updateCamStatus") {
+		
+	
+	  }
+	  else if($tag == "updateCamStatus") {
 
 		$uid = $_POST['userid'];
 		$webcam_id = $_POST['webcamid'];
 		$finish = $_POST['finish'];		
-		
+ 		
+ 		
+	
 		if($finish=="true"){
 			$result=$db->setCamToInactive($uid,$webcam_id);	
 			if($result){
@@ -206,7 +211,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 		}
 		echo json_encode($response);
 
-	}
+ 	}
 	else {
 	  echo "Invalid Request";
 	 }

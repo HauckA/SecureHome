@@ -154,7 +154,18 @@
 										</div>
 										<div class="webcam_image">
 											<a href="webcam_detail.php?id=<?php echo "$webcamID";?>">
-												<img src="img/placeholder.jpg" />
+												
+												<?php
+													$directory = "api/registratedUserhome/".$_SESSION['email']."/$webcamID";
+													$files = @scandir($directory, SCANDIR_SORT_DESCENDING);
+													
+													$newest_file = $files[0];
+													if(empty($newest_file)) {
+														echo "<img src=\"img/placeholder.jpg\" />";
+													} else {
+														echo "<img src=\"$directory/$newest_file\"/>";
+													}
+												?>
 											</a>
 										</div>
 									</div>

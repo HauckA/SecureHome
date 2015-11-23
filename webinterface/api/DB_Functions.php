@@ -182,7 +182,8 @@ class DB_Functions {
 			
 		}
 	}
-	 /**
+ 
+	/**
 	  * Set Cam to active
 	  * @param userid,webcam_id
 	  * 
@@ -197,7 +198,8 @@ class DB_Functions {
 			return false;
 		}
 	}
-	 /**
+
+	/**
 	  * Set Cam to Inactive
 	  * @param userid,webcam_id
 	  * 
@@ -213,7 +215,6 @@ class DB_Functions {
 			return false;
 		}
 	}
- 
  
     /**
      * Encrypting password
