@@ -46,19 +46,19 @@
                 android:id="@+id/txtWebcamDescription" />
 
             <Button
-                android:layout_width="227dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtStartBroadcast"
                 android:id="@+id/btnStartBroadcast"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="5dp"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtCancelBroadcast"
                 android:id="@+id/btnCancelBroadcast"
-                android:layout_marginTop="20dp" />
+                android:layout_marginBottom="20dp" />
 
             <FrameLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
