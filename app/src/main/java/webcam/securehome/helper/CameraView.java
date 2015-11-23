@@ -112,7 +112,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
             //TODO Upload File to Server
             String strImage= Base64.encodeToString(data, Base64.DEFAULT); // image1 is your byte[]
 
-            //mCamera.startPreview();
+            mCamera.startPreview(); //Wenn das bei mir fehlt, schliesst es die App nach einem übertragenen Bild...
            if(!finish) {
                new UploadData(CameraView.this).execute(strImage);
                try {

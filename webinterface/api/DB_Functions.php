@@ -188,8 +188,8 @@ class DB_Functions {
 	  * @param userid,webcam_id
 	  * 
 	 */
-	 public function setCamToActive($userid,$webcam_id) {
-		$query = mysql_query("UPDATE user_device SET isActive=1 WHERE device_id=$webcam_id and user_id=$userid");
+	 public function setCamToActive($webcam_id) {
+		$query = mysql_query("UPDATE device SET isActive=1 WHERE id=$webcam_id");
 	
 		// check for successful UPDATE
 		if ($query) {
@@ -204,9 +204,9 @@ class DB_Functions {
 	  * @param userid,webcam_id
 	  * 
 	 */
-	 public function setCamToInactive($userid,$webcam_id) {
+	 public function setCamToInactive($webcam_id) {
 		
-		$query = mysql_query("UPDATE user_device SET isActive=0 WHERE device_id=$webcam_id and user_id=$userid");
+		$query = mysql_query("UPDATE device SET isActive=0 WHERE id=$webcam_id");
 	
 		// check for successful UPDATE
 		if ($query) {

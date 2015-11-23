@@ -62,7 +62,6 @@ public class UpdateStatus extends AsyncTask<String, Void, JSONObject> {
     protected JSONObject doInBackground(String... params) {
         List<NameValuePair> paramsPack = new ArrayList<>();
         paramsPack.add(new BasicNameValuePair("tag", "updateCamStatus"));
-        paramsPack.add(new BasicNameValuePair("userid", String.valueOf(userid)));
         paramsPack.add(new BasicNameValuePair("webcamid", String.valueOf(webcamid)));
         paramsPack.add(new BasicNameValuePair("finish", params[0]));
         JSONObject json = jsonParser.getJSONFromUrl(URL, paramsPack);

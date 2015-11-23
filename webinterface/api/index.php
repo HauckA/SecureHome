@@ -185,14 +185,13 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 	  }
 	  else if($tag == "updateCamStatus") {
 
-		$uid = $_POST['userid'];
 		$webcam_id = $_POST['webcamid'];
 		$finish = $_POST['finish'];		
  		
  		
 	
 		if($finish=="true"){
-			$result=$db->setCamToInactive($uid,$webcam_id);	
+			$result=$db->setCamToInactive($webcam_id);	
 			if($result){
 				$response["success"] = 1;
 			}
@@ -201,7 +200,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 			}
 		}
 		else{
-			$result=$db->setCamToActive($uid,$webcam_id);
+			$result=$db->setCamToActive($webcam_id);
 			if($result){
 				$response["success"] = 1;
 			}
