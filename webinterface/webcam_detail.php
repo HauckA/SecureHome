@@ -186,7 +186,8 @@
 										
 										$start_of_cut = 3+strlen($webcamID)+1; //Bsp.: cam5_228383828.jpg => 228383828.jpg
 										$date_before = null;
-										$date_active = "18November2015";
+										$date_active_timestamp = substr($newest_file, $start_of_cut, -4);  //Bsp: 228383828.jpg => 228383828
+										$date_active = date("dFY", $date_active_timestamp); //Datum des aktuellsten Bildes auslesen, gibt z.B. 18November2015
 										$times = array();
 										foreach($files as $file) {
 											$timestamp = substr($file, $start_of_cut, -4); //Bsp: 228383828.jpg => 228383828
