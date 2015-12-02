@@ -72,6 +72,42 @@
 	
 	//close connection
 	curl_close($ch);
+	
+	
+	
+	/*
+	 * DATE AND TIME HANDLING
+	*/
+	$directory = "api/registratedUserhome/".$_SESSION['email']."/$webcamID";
+	$files = @scandir($directory, SCANDIR_SORT_DESCENDING);
+	$start_of_cut = 3+strlen($webcamID)+1; //Bsp.: cam5_228383828.jpg => 228383828.jpg
+	
+	if(isset($_REQUEST['date'])) {
+		$date_active = $_REQUEST['date'];
+	} else {
+		$timestamp = substr($files[0], $start_of_cut, -4);
+		$date_active = date("dFY", $timestamp); //Value-Wert generieren//get date of the youngest file
+	}
+
+	$dates = array();
+	$times = array();
+	$date_before = null;
+	
+	foreach($files AS $file) {
+		$timestamp = substr($file, $start_of_cut, -4); //Bsp: 228383828.jpg => 228383828
+		if(strlen($timestamp) == 10) {
+			$date = date("d. F Y", $timestamp); //Datum generieren, z.B. 18. November 2015
+			if($date != $date_before) { //Wenn datum noch nicht vorhanden, dem Dropdown hinzufügen
+				array_push($dates, $timestamp);
+				$date_before = $date;
+			} 
+			if(date("dFY",$timestamp) == $date_active) { //If the date is the same as the active date, add the timestamp to an array which is processed below
+				array_push($times, $timestamp);
+			}
+
+		}
+	}
+
 ?>
 
 <!doctype html>
@@ -86,6 +122,11 @@
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
 	<script type="text/javascript">
 
+		function changeDate(value) {
+			var url = window.location;
+			window.location.href = url + "&date=" + value;
+		}
+	
 	   function changePicture(value) {
 		  document.getElementById("webcam_img").src = value;
 	   }
@@ -147,89 +188,70 @@
 		</nav>
 	</div>
 	<div id="maincontent">
-		<div class="row">
-			<div class="large-12 columns">
+		<div class="main_container">
 			<h1><?php echo $result2["description"]; ?></h1>
 			<p>
-			
-			
-			<div class="row">
-				<div class="large-12 small-12 columns">
-					<div class="webcam row">
-						<div class="webcam_content small-12 medium-9 large-9 columns">
-							<div class="status_image">
-								<?php
-									if($result2["isActive"] == 0) {
-										echo "<img src=\"img/webcam_offline.png\" alt=\"Webcam\" /> offline";
-									} else if($result2["isActive"] == 1) {
-										echo "<img src=\"img/webcam_online.png\" alt=\"Webcam\" /> online";
-									}
-								?>
-							</div>
-							<div class="webcam_image">
-								<?php
-									$directory = "api/registratedUserhome/".$_SESSION['email']."/$webcamID";
-									$files = @scandir($directory, SCANDIR_SORT_DESCENDING);
-									$newest_file = $files[0];
-									if(empty($newest_file)) {
-										echo "<img src=\"img/placeholder.jpg\" />";
-									} else {
-										echo "<img src=\"$directory/$newest_file\" id=\"webcam_img\"/>";
-									}
-								?>
-							</div>
-						</div>
-						<div class="webcam_timehandler small-12 medium-3 large-3 columns">
-							<form action="<?php echo $_SERVER['PHP_SELF'];?>">
-								<select class="timehandler_date">
-									<?php
-										
-										$start_of_cut = 3+strlen($webcamID)+1; //Bsp.: cam5_228383828.jpg => 228383828.jpg
-										$date_before = null;
-										$date_active_timestamp = substr($newest_file, $start_of_cut, -4);  //Bsp: 228383828.jpg => 228383828
-										$date_active = date("dFY", $date_active_timestamp); //Datum des aktuellsten Bildes auslesen, gibt z.B. 18November2015
-										$times = array();
-										foreach($files as $file) {
-											$timestamp = substr($file, $start_of_cut, -4); //Bsp: 228383828.jpg => 228383828
-
-											if(strlen($timestamp) == 10) { //timestamp muss 10 Zeichen lang sein
-												$date = date("d. F Y",$timestamp); //Datum generieren, z.B. 18. November 2015
-												if($date != $date_before) { //Wenn datum noch nicht vorhanden, dem Dropdown hinzufügen
-													echo "<option>$date</option>";
-													$date_before = $date;
-												} 
-												if(date("dFY",$timestamp) == $date_active) { //If the date is the same as the active date, add the timestamp to an array which is processed below
-													array_push($times, $timestamp);
-												}
-								
-											}
-										}
-										
-										echo $active_date;
-									?>
-								</select>
-								
-								<select id="timehandler_time" size="40" onchange="changePicture(this.value)">
-									<?php
-										foreach($times as $time) {
-											echo "<option value=\"$directory/cam".$id."_$time.jpg\">".date("H:i:s", $time)."</option>";
-										}
-									?>
-								</select>
-							</form>
-						</div>
+			<div class="webcam row">
+				<div class="webcam_content small-12 medium-9 large-9 columns">
+					<div class="status_image">
+						<?php
+							if($result2["isActive"] == 0) {
+								echo "<img src=\"img/webcam_offline.png\" alt=\"Webcam\" /> offline";
+							} else if($result2["isActive"] == 1) {
+								echo "<img src=\"img/webcam_online.png\" alt=\"Webcam\" /> online";
+							}
+						?>
 					</div>
-				</div>				
-			</div>
-			
-			<!-- 
-				TODO: 
-				- Get Webcamdescription by UserId
-				- If no Webcam has been registrated, show info
-				- Show if Webcam is recording or not (green/red dot)
-				- Nice to have: Change position of camera with drag & drop
-				
-				-->
+					<div class="webcam_image">
+						<?php									
+							$newest_file = $times[0];
+							if(empty($newest_file)) {
+								echo "<img src=\"img/placeholder.jpg\" />";
+							} else {
+								echo "<img src=\"$directory/cam".$id."_".$newest_file.".jpg\" id=\"webcam_img\"/>";
+							}
+						?>
+					</div>
+				</div>
+				<div class="webcam_timehandler small-12 medium-3 large-3 columns">
+					<form action="<?php echo $_SERVER['PHP_SELF'];?>">
+						<select class="timehandler_date" onchange="changeDate(this.value)">
+							<?php
+								
+								foreach($dates as $date_timestamp) {
+									$date = date("d. F Y", $date_timestamp); //Datum generieren, z.B. 18. November 2015
+									$date_for_value = date("dFY", $date_timestamp); //Value-Wert generieren
+									
+									if($date_for_value == $date_active) {
+										$selected = "selected=\"selected\"";
+									} else {
+										$selected = "";
+									}
+									
+									echo "<option value=\"$date_for_value\" $selected>$date</option>";								
+								}
+								
+								
+								echo $active_date;
+							?>
+						</select>
+						
+						<select id="timehandler_time" size="10" onchange="changePicture(this.value)">
+							<?php
+								$i = 0;
+								foreach($times as $time) {
+									if($i == 0) {
+										$selected = "selected=\"selected\"";
+									} else {
+										$selected = "";
+									}
+									echo "<option value=\"$directory/cam".$id."_$time.jpg\" $selected>".date("H:i:s", $time)."</option>";
+									$i++;
+								}
+							?>
+						</select>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>	

@@ -137,56 +137,58 @@
 		</nav>
 	</div>
 	<div id="maincontent">
-		<div class="row">
-		  <div class="large-8 medium-8 columns">
-			<h1>Login</h1>
-			<p>
-				Melden Sie sich mit Ihren Benutzerdaten an, um Ihre Webcams zu nutzen.
-			</p>
-			<p class="error">
-				<?php
-					if(isset($errorMessage)) {
-						echo " 
-							<div class=\"alert\">
-								$errorMessage
-							</div>";
-					}else if(isset($successMessage)) {
-						echo"
-							<div class=\"success\">
-								$successMessage
-							</div>";
-					}
-				?>
-			</p>
-			<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-					  <div class="row">
-						<div class="large-6 columns">
-						  <label>Benutzername</label>
-						  <input type="text" name="username"/>
-						</div>
-						<div class="large-6 columns">
-							<label>Passwort</label>
-						  <input type="password" name="password"/>
-						</div>
-					  </div>
-					  <div class="row">
-						<div class="large-6 columns">
-						</div>
-						<div class="large-6 columns">
-							<input type="hidden" name="tag" value="login" />
-							<input type="submit" value="Login" name="login" />
-						</div>
-					  </div>
-					</form>
-		  </div>     
+		<div class="main_container">
+			<div class="row">
+			  <div class="large-8 medium-8 columns">
+				<h1>Login</h1>
+				<p>
+					Melden Sie sich mit Ihren Benutzerdaten an, um Ihre Webcams zu nutzen.
+				</p>
+				<p class="error">
+					<?php
+						if(isset($errorMessage)) {
+							echo " 
+								<div class=\"alert\">
+									$errorMessage
+								</div>";
+						}else if(isset($successMessage)) {
+							echo"
+								<div class=\"success\">
+									$successMessage
+								</div>";
+						}
+					?>
+				</p>
+				<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+						  <div class="row">
+							<div class="large-6 columns">
+							  <label>Benutzername</label>
+							  <input type="text" name="username"/>
+							</div>
+							<div class="large-6 columns">
+								<label>Passwort</label>
+							  <input type="password" name="password"/>
+							</div>
+						  </div>
+						  <div class="row">
+							<div class="large-6 columns">
+							</div>
+							<div class="large-6 columns">
+								<input type="hidden" name="tag" value="login" />
+								<input type="submit" value="Login" name="login" />
+							</div>
+						  </div>
+						</form>
+			  </div>     
 
-		  <div class="large-4 medium-4 columns">
-			<div class="panel">
-				<h5>Passwort vergessen</h5>
-				Haben Sie Ihr Passwort vergessen? <a href="#">Neues Passwort anfordern</a>        
+			  <div class="large-4 medium-4 columns">
+				<div class="panel">
+					<h5>Passwort vergessen</h5>
+					Haben Sie Ihr Passwort vergessen? <a href="#">Neues Passwort anfordern</a>        
+				</div>
+			
+			  </div>
 			</div>
-		
-		  </div>
 		</div>
 	</div>
 	<div id="footer">

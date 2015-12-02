@@ -152,83 +152,85 @@
 		</nav>
 	</div>
 	<div id="maincontent">
-		<div class="row">
-		  <div class="large-8 medium-8 columns">
-			<h1>Kostenloses Konto erstellen</h1>
-			<p>
-				Registrieren Sie sich hier, um sämtliche Funktionen von Secure@Home zu nutzen.
-			</p>
-			<p class="error">
-				<?php
-					if(isset($errorMessage)) {
-						
-						echo "<div class=\"alert\">
-								$errorMessage
-							</div>";
-					} else if(isset($successMessage)) {
-						echo "<div class=\"success\">
-								$successMessage
-							</div";
-					}
-				?>
-			</p>
-			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-					  <div class="row">
-						<div class="large-6 columns">
-						  <label>Vorname</label>
-						  <input type="text" name="firstname" value="<?php if(isset($firstname)) {echo $firstname; } ?>"/>
-						</div>
-						<div class="large-6 columns">
-							<label>Name</label>
-						  <input type="text" name="lastname" value="<?php if(isset($lastname)) {echo $lastname;}?>"/>
-						</div>
-					  </div>
-					   <div class="row">
-						<div class="large-6 columns">
-						  <label>E-Mail</label>
-						  <input type="text" name="email" value="<?php if(isset($email)) {echo $email;} ?>"/>
-						</div>
-						<div class="large-6 columns">
-							<label>Gewünschter Benutzername</label>
-						  <input type="text" name="username" value="<?php if(isset($username)) {echo $username;} ?>"/>
-						</div>
-					  </div>
-					   <div class="row">
-						<div class="large-6 columns">
-						  <label>Passwort</label>
-						  <input type="password" name="password1"/>
-						</div>
-						<div class="large-6 columns">
-							<label>Passwort wiederholen</label>
-						  <input type="password" name="password2" />
-						</div>
-					  </div>
-
-					  <div class="row">
-						<div class="large-6 columns">
-
-						  
-						</div>
-						<div class="large-6 columns">
-							<input type="hidden" name="tag" value="register" />
-							<input type="submit" value="Konto erstellen" name="absenden" />
-						</div>
-					  </div>
-					</form>
-		  </div>     
-
-		  <div class="large-4 medium-4 columns">
-			<div class="panel">
-				<h5>Ein Konto - viele Vorteile</h5>
+		<div class="main_container">
+			<div class="row">
+			  <div class="large-8 medium-8 columns">
+				<h1>Kostenloses Konto erstellen</h1>
 				<p>
-					<ul>
-						<li><b>Einfache Verwaltung</b><br />Sowohl das Registrieren neuer Webcams wie auch die Verwaltung über das Webinterface sind sehr einfach gehalten.</li>
-						<li><b>Ein Konto für alles</b><br /> Mit Ihrem persönlichen Konto melden Sie sich sowohl bei der App als auch im Webinterface an.</li>
-					</ul>
+					Registrieren Sie sich hier, um sämtliche Funktionen von Secure@Home zu nutzen.
 				</p>
+				<p class="error">
+					<?php
+						if(isset($errorMessage)) {
+							
+							echo "<div class=\"alert\">
+									$errorMessage
+								</div>";
+						} else if(isset($successMessage)) {
+							echo "<div class=\"success\">
+									$successMessage
+								</div";
+						}
+					?>
+				</p>
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+						  <div class="row">
+							<div class="large-6 columns">
+							  <label>Vorname</label>
+							  <input type="text" name="firstname" value="<?php if(isset($firstname)) {echo $firstname; } ?>"/>
+							</div>
+							<div class="large-6 columns">
+								<label>Name</label>
+							  <input type="text" name="lastname" value="<?php if(isset($lastname)) {echo $lastname;}?>"/>
+							</div>
+						  </div>
+						   <div class="row">
+							<div class="large-6 columns">
+							  <label>E-Mail</label>
+							  <input type="text" name="email" value="<?php if(isset($email)) {echo $email;} ?>"/>
+							</div>
+							<div class="large-6 columns">
+								<label>Gewünschter Benutzername</label>
+							  <input type="text" name="username" value="<?php if(isset($username)) {echo $username;} ?>"/>
+							</div>
+						  </div>
+						   <div class="row">
+							<div class="large-6 columns">
+							  <label>Passwort</label>
+							  <input type="password" name="password1"/>
+							</div>
+							<div class="large-6 columns">
+								<label>Passwort wiederholen</label>
+							  <input type="password" name="password2" />
+							</div>
+						  </div>
+
+						  <div class="row">
+							<div class="large-6 columns">
+
+							  
+							</div>
+							<div class="large-6 columns">
+								<input type="hidden" name="tag" value="register" />
+								<input type="submit" value="Konto erstellen" name="absenden" />
+							</div>
+						  </div>
+						</form>
+			  </div>     
+
+			  <div class="large-4 medium-4 columns">
+				<div class="panel">
+					<h5>Ein Konto - viele Vorteile</h5>
+					<p>
+						<ul>
+							<li><b>Einfache Verwaltung</b><br />Sowohl das Registrieren neuer Webcams wie auch die Verwaltung über das Webinterface sind sehr einfach gehalten.</li>
+							<li><b>Ein Konto für alles</b><br /> Mit Ihrem persönlichen Konto melden Sie sich sowohl bei der App als auch im Webinterface an.</li>
+						</ul>
+					</p>
+				</div>
+			
+			  </div>
 			</div>
-		
-		  </div>
 		</div>
 	</div>
 	<div id="footer">

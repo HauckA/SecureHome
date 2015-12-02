@@ -57,10 +57,13 @@
 						</ul>
 					</li>
 					<?php if(isset($_SESSION['loggedIn'])) { ?>
-						<li>
+						<li class="has-dropdown">
 							<a href="webcam_monitor.php">
 								<?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?>
 							</a>
+							<ul class="dropdown">
+								<li><a href="logout.php">Logout</a></li>
+							</ul>
 						</li>
 						
 					<?php } else { ?>
@@ -91,56 +94,58 @@
 	</div>
 
 	<div id="maincontent">
-		<div class="row">
-		  <div class="large-8 medium-8 columns">
-			<h1>Secure@Home</h1>
-			<p>Smartphones verfügen heute über eine äusserst gute Aufnahmequalität. Aus diesem Grund können Sie auch bestens als 
-			Webcam oder Überwachungskamera eingesetzt werden. So erhält das nicht mehr benötigte Smartphone eine
-			sinnvolle Funktion.</p>
-			
+		<div class="main_container">
 			<div class="row">
-				<div class="large-2 columns">
-					&nbsp;
+			  <div class="large-8 medium-8 columns">
+				<h1>Secure@Home</h1>
+				<p>Smartphones verfügen heute über eine äusserst gute Aufnahmequalität. Aus diesem Grund können Sie auch bestens als 
+				Webcam oder Überwachungskamera eingesetzt werden. So erhält das nicht mehr benötigte Smartphone eine
+				sinnvolle Funktion.</p>
+				
+				<div class="row">
+					<div class="large-2 columns">
+						&nbsp;
+					</div>
+					<div class="large-8 columns">
+						<img src="img/schema_website.png" alt="Übersicht" />
+					</div>
+					<div class="large-2 columns">
+					</div>
 				</div>
-				<div class="large-8 columns">
-					<img src="img/schema_website.png" alt="Übersicht" />
+				
+				<div class="row">
+					<div class="large-6 columns">
+						<h4>Dienstleistungen</h4>
+						<p>Wir bieten Ihnen eine kostenlose App, mit der Sie Ihr Android-Smartphone bequem als Webcam einsetzen können. Über das Webinterface verwalten
+						Sie die registrierten Geräte und schauen sich die übermittelten Bilder an.</p>
+					</div>
+					<div class="large-6 columns">
+						<h4>Wie funktionierts?</h4>
+						<p>Alles was Sie benötigen ist unsere Secure@Home-App aus dem Android Playstore sowie ein Benutzerkonto. Mehr erfahren Sie in der rechten Box.</p>
+						<p>Beachten Sie auch unsere ausführliche Anleitung im <a href="#">Support-Bereich</a>.
+					</div>
 				</div>
-				<div class="large-2 columns">
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="large-6 columns">
-					<h4>Dienstleistungen</h4>
-					<p>Wir bieten Ihnen eine kostenlose App, mit der Sie Ihr Android-Smartphone bequem als Webcam einsetzen können. Über das Webinterface verwalten
-					Sie die registrierten Geräte und schauen sich die übermittelten Bilder an.</p>
-				</div>
-				<div class="large-6 columns">
-					<h4>Wie funktionierts?</h4>
-					<p>Alles was Sie benötigen ist unsere Secure@Home-App aus dem Android Playstore sowie ein Benutzerkonto. Mehr erfahren Sie in der rechten Box.</p>
-					<p>Beachten Sie auch unsere ausführliche Anleitung im <a href="#">Support-Bereich</a>.
-				</div>
-			</div>
 
-			 
-		  </div>     
+				 
+			  </div>     
 
-		  <div class="large-4 medium-4 columns">
-			
-			<div class="panel">
-				<h5>So einfach funktionierts</h5>
-				<p>
-					<ol>
-						<li><b>Konto erstellen</b><br/> Mit Ihren persönlichen Konto melden Sie sich in der App und im Webinterface an.</li>
-						<li><b>Gerät registrieren</b><br /> Über die Secure@Home-App registrieren Sie Ihr Smartphone als Webcam</li>
-						<li><b>Datenübertragung starten</b><br /> Starten Sie über die App die Synchronisation mit dem Server.</li>
-						<li><b>Sicher sein</b><br /> Über das Webinterface kontrollieren Sie alle aktiven Webcams. Auch können Sie 
-						die aufgenomenen Bilder der Vergangeheit anschauen.</li>
-					</ol>
-				</p>
-				<a href="create_account.php" class="small button alert fullWidth">Konto erstellen</a>          
+			  <div class="large-4 medium-4 columns">
+				
+				<div class="panel">
+					<h5>So einfach funktionierts</h5>
+					<p>
+						<ol>
+							<li><b>Konto erstellen</b><br/> Mit Ihren persönlichen Konto melden Sie sich in der App und im Webinterface an.</li>
+							<li><b>Gerät registrieren</b><br /> Über die Secure@Home-App registrieren Sie Ihr Smartphone als Webcam</li>
+							<li><b>Datenübertragung starten</b><br /> Starten Sie über die App die Synchronisation mit dem Server.</li>
+							<li><b>Sicher sein</b><br /> Über das Webinterface kontrollieren Sie alle aktiven Webcams. Auch können Sie 
+							die aufgenomenen Bilder der Vergangeheit anschauen.</li>
+						</ol>
+					</p>
+					<a href="create_account.php" class="small button alert fullWidth">Konto erstellen</a>          
+				</div>
+			  </div>
 			</div>
-		  </div>
 		</div>
 	</div>
 	<div id="footer">

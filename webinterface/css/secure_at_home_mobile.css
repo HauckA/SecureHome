@@ -14,10 +14,19 @@
 
 	#maincontent .row .columns {
 		width: 100%;
+		padding: 0px;
+	}
+	
+	#maincontent .row {
+		margin: 10px 0px;
 	}
 	
 	#maincontent .webcam h5 {
 		margin-top: 15px;
+	}
+	
+	#maincontent .webcam_content {
+		margin-bottom: 1rem;
 	}
 
 }
@@ -64,7 +73,12 @@
 		padding-bottom: 20px;
 	}
 	
-	.top-bar.expanded .top-bar-section li.has-dropdown > a::after {
+	.top-bar-section li.active:not(.has-form) a:not(.button) {
+		background-color: #730E0E;
+		color: #fff;
+	}
+	
+	.top-bar.expanded .top-bar-section li.has-dropdown > a:after {
 		border-color: transparent transparent transparent #fff;
 	}
 	

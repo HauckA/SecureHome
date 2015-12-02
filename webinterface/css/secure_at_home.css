@@ -87,13 +87,27 @@ input[type="submit"] {
 }
 
 #maincontent {
-	padding-bottom: 40px;
-	padding-top: 40px;
+	padding: 10px 10px 40px;
 	background-color: #fff;
+}
+
+#maincontent .main_container {
+	max-width: 62.5rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #maincontent .row {
 	margin-top: 20px;
+	max-width: 100%;
+}
+
+#maincontent .row > .columns:first-child {
+	padding-left: 0px;
+}
+
+#maincontent .row > .columns:last-child {
+	padding-right: 0px;
 }
 
 
@@ -134,25 +148,6 @@ h5,
 	border-color: #262626 transparent transparent;
 }
 
-.webcam .webcam_content {
-	position: relative;
-}
-
-.webcam .webcam_content .webcam_image img {
-	width: 100%;
-	border-radius: 10px;
-}
-
-.webcam .webcam_content .status_image {
-	position: absolute;
-	padding: 5px 10px 5px 5px;
-	background-color: #E3DDBF;
-	top: 15px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-
 #header {
 	padding: 20px;
 }
@@ -190,3 +185,31 @@ h5,
 	width: 100%;
 	max-width: 100px;
 }
+
+select {
+	height: inherit;
+}
+
+
+#maincontent .webcam {
+	margin-top: 0px;
+}
+
+.webcam .webcam_content {
+	position: relative;
+}
+
+.webcam .webcam_content .webcam_image img {
+	width: 100%;
+	border-radius: 10px;
+}
+
+.webcam .webcam_content .status_image {
+	position: absolute;
+	padding: 5px 10px 5px 5px;
+	background-color: #E3DDBF;
+	top: 15px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+

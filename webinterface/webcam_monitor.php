@@ -100,104 +100,93 @@
 		</nav>
 	</div>
 	<div id="maincontent">
+		<div class="main_container">
+		<h1>Webcam Monitor</h1>
+		<p>
+		
+		<b>Herzlich Willkommen, <?php echo $_SESSION['firstname']." ".$_SESSION['lastname'] ?></b>
+		</p>
+		
 		<div class="row">
-			<div class="large-12 columns">
-			<h1>Webcam Monitor</h1>
-			<p>
-			
-			<b>Herzlich Willkommen, <?php echo $_SESSION['firstname']." ".$_SESSION['lastname'] ?></b>
-			</p>
-			
-			<div class="row">
-			
-				<?php
-						
-						
-					for($i=0; $i<$result['numberOfWebcams']; $i++) {
-					
-						$webcamID = $result['webcamID'][$i];
+		
+			<?php
 					
 					
-						$data2 = array(
-							"tag" => "getWebcamInfos",
-							"webcamID" => $webcamID
-						);
-						
-											
-						curl_setopt($ch, CURLOPT_POST, sizeof($data2));
-						curl_setopt($ch, CURLOPT_POSTFIELDS, $data2);
-
-						//execute post
-						$result2 = curl_exec($ch);
-						
-						//decode JSON String
-						$result2 = (json_decode($result2, true));
+				for($i=0; $i<$result['numberOfWebcams']; $i++) {
 				
-						
-						?>
-						
-						
-						
-							<div class="large-6 small-6 columns">
-								<div class="webcam">
-									<h5><a href="webcam_detail.php?id=<?php echo "$webcamID"; ?>"><?php echo $result2['description'];?></a></h5>
-									<div class="webcam_content">
-										<div class="status_image">
+					$webcamID = $result['webcamID'][$i];
+				
+				
+					$data2 = array(
+						"tag" => "getWebcamInfos",
+						"webcamID" => $webcamID
+					);
+					
+										
+					curl_setopt($ch, CURLOPT_POST, sizeof($data2));
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $data2);
+
+					//execute post
+					$result2 = curl_exec($ch);
+					
+					//decode JSON String
+					$result2 = (json_decode($result2, true));
+			
+					
+					?>
+					
+					
+					
+						<div class="large-6 small-6 columns">
+							<div class="webcam">
+								<h5><a href="webcam_detail.php?id=<?php echo "$webcamID"; ?>"><?php echo $result2['description'];?></a></h5>
+								<div class="webcam_content">
+									<div class="status_image">
+										<?php
+											if($result2['isActive'] == 0) {
+												echo " <img src=\"img/webcam_offline.png\" alt=\"Webcam\" /> offline";
+											} elseif($result2['isActive'] == 1) {
+												echo " <img src=\"img/webcam_online.png\" alt=\"Webcam\" /> online";
+											}
+										?>
+										
+									</div>
+									<div class="webcam_image">
+										<a href="webcam_detail.php?id=<?php echo "$webcamID";?>">
+											
 											<?php
-												if($result2['isActive'] == 0) {
-													echo " <img src=\"img/webcam_offline.png\" alt=\"Webcam\" /> offline";
-												} elseif($result2['isActive'] == 1) {
-													echo " <img src=\"img/webcam_online.png\" alt=\"Webcam\" /> online";
+												$directory = "api/registratedUserhome/".$_SESSION['email']."/$webcamID";
+												$files = @scandir($directory, SCANDIR_SORT_DESCENDING);
+												
+												$newest_file = $files[0];
+												if(empty($newest_file)) {
+													echo "<img src=\"img/placeholder.jpg\" />";
+												} else {
+													echo "<img src=\"$directory/$newest_file\"/>";
 												}
 											?>
-											
-										</div>
-										<div class="webcam_image">
-											<a href="webcam_detail.php?id=<?php echo "$webcamID";?>">
-												
-												<?php
-													$directory = "api/registratedUserhome/".$_SESSION['email']."/$webcamID";
-													$files = @scandir($directory, SCANDIR_SORT_DESCENDING);
-													
-													$newest_file = $files[0];
-													if(empty($newest_file)) {
-														echo "<img src=\"img/placeholder.jpg\" />";
-													} else {
-														echo "<img src=\"$directory/$newest_file\"/>";
-													}
-												?>
-											</a>
-										</div>
+										</a>
 									</div>
 								</div>
 							</div>
-						
-						<?php
-						
-						if($i % 2 != 0) {
-							echo "
-								</div>
-								<div class=\"row\">
-								";
-						}
-						
+						</div>
+					
+					<?php
+					
+					if($i % 2 != 0) {
+						echo "
+							</div>
+							<div class=\"row\">
+							";
 					}
 					
-					//close connection
-					curl_close($ch);
-				?>
-			
-			</div>
-			
-			<!-- 
-				TODO: 
-
-				- If no Webcam has been registrated, show info
-				- Show if Webcam is recording or not (green/red dot)
-				- Nice to have: Change position of camera with drag & drop
+				}
 				
-				-->
-			</div>
+				//close connection
+				curl_close($ch);
+			?>
+		
+		</div>
 		</div>
 	</div>	
 	<div id="footer">
