@@ -190,7 +190,7 @@
 							  <input type="text" name="email" value="<?php if(isset($email)) {echo $email;} ?>"/>
 							</div>
 							<div class="large-6 columns">
-								<label>Gewünschter Benutzername</label>
+								<label>Gew&uuml;nschter Benutzername</label>
 							  <input type="text" name="username" value="<?php if(isset($username)) {echo $username;} ?>"/>
 							</div>
 						  </div>
@@ -224,7 +224,7 @@
 					<p>
 						<ul>
 							<li><b>Einfache Verwaltung</b><br />Sowohl das Registrieren neuer Webcams wie auch die Verwaltung über das Webinterface sind sehr einfach gehalten.</li>
-							<li><b>Ein Konto für alles</b><br /> Mit Ihrem persönlichen Konto melden Sie sich sowohl bei der App als auch im Webinterface an.</li>
+							<li><b>Ein Konto f&uuml;r alles</b><br /> Mit Ihrem pers&ouml;nlichen Konto melden Sie sich sowohl bei der App als auch im Webinterface an.</li>
 						</ul>
 					</p>
 				</div>
