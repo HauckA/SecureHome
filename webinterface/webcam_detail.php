@@ -169,7 +169,7 @@
 					<li class="has-dropdown">
 						<a href="#">About</a>
 						<ul class="dropdown">
-							<li><a href="#">Über dieses Projekt</a></li>
+							<li><a href="#">&Uuml;ber dieses Projekt</a></li>
 							<li><a href="#">Impressum</a></li>
 						</ul>
 					</li>
